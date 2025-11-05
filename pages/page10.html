@@ -221,7 +221,7 @@
             height: 1px;
             background: linear-gradient(90deg, rgba(4, 69, 172, 0), rgba(4, 69, 172, 0.2), rgba(4, 69, 172, 0));
             border-radius: 999px;
-            margin: 40px 0;
+            margin: 10px 0;
             box-shadow: 0 12px 24px rgba(4, 69, 172, 0.08);
         }
 
@@ -315,6 +315,11 @@
             margin-top: 0;
         }
 
+        /* Reduce spacing for Issues/Concerns and Action Items sections */
+        .section-header + .text-area {
+            margin-top: 8px;
+        }
+
         .section-subheader {
             font-size: 17px;
             color: var(--text-secondary);
@@ -335,7 +340,7 @@
             border-radius: 12px;
             resize: vertical;
             transition: all 0.2s ease;
-            margin-bottom: 24px;
+            margin-bottom: 6px;
         }
 
         .text-area:focus {
@@ -2198,7 +2203,7 @@
             <!-- Issues/Concerns Section -->
             <div class="section-divider" aria-hidden="true"></div>
             
-            <div>
+            <div style="margin-top: 8px;">
                 <h2 class="section-header">Issues/Concerns</h2>
                 <textarea 
                     id="issues-concerns-page10" 
@@ -2209,7 +2214,7 @@
             </div>
 
             <!-- Action Items Section -->
-            <div>
+            <div style="margin-top: 8px;">
                 <h2 class="section-header">Action Items</h2>
                 <textarea 
                     id="action-items-page10" 
