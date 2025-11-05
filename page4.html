@@ -167,10 +167,379 @@
 
         .main-content {
             margin-left: var(--sidebar-width);
-            padding: 48px;
+            padding: 0;
+            width: calc(100% - var(--sidebar-width));
+            min-height: 100vh;
+            background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 50%, #fafbfc 100%);
         }
 
-    
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: clamp(48px, 8vw, 88px) clamp(32px, 5vw, 64px);
+        }
+
+        .header {
+            margin-bottom: 56px;
+            text-align: left;
+        }
+
+        .header h1 {
+            font-size: clamp(40px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color) 0%, #5ac8fa 100%);
+            border-radius: 2px;
+            margin: 0;
+        }
+
+        .container > h2 {
+            font-size: clamp(28px, 3.5vw, 36px);
+            color: #1d1d1f;
+            font-weight: 700;
+            margin-bottom: 16px;
+            margin-top: 48px;
+            letter-spacing: -0.02em;
+        }
+
+        .year-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: rgba(4, 69, 172, 0.08);
+            color: var(--accent-color);
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(4, 69, 172, 0.15);
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .chart-container canvas {
+            max-height: 400px;
+        }
+
+        .sources-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            margin-bottom: 24px;
+        }
+
+        .sources-table thead {
+            background: linear-gradient(180deg, #f8f9fb 0%, #f0f2f5 100%);
+        }
+
+        .sources-table th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(29, 29, 31, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .sources-table td {
+            padding: 16px 20px;
+            font-size: 15px;
+            color: #1d1d1f;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .sources-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .sources-table tbody tr:hover {
+            background: rgba(4, 69, 172, 0.03);
+        }
+
+        .source-name {
+            font-weight: 600;
+        }
+
+        .total-row {
+            background: linear-gradient(180deg, #f8f9fb 0%, #f0f2f5 100%);
+            font-weight: 700;
+        }
+
+        .total-row:hover {
+            background: linear-gradient(180deg, #f8f9fb 0%, #f0f2f5 100%) !important;
+        }
+
+        .table-scroll {
+            overflow-x: visible;
+            margin: 24px 0;
+        }
+
+        .landing-table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .landing-table thead {
+            background: linear-gradient(180deg, #f8f9fb 0%, #f0f2f5 100%);
+        }
+
+        .landing-table th {
+            padding: 16px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(29, 29, 31, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .landing-table td {
+            padding: 16px 20px;
+            font-size: 15px;
+            color: #1d1d1f;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .landing-table th:not(:first-child),
+        .landing-table td:not(:first-child) {
+            text-align: center;
+        }
+
+        .landing-table th:first-child,
+        .landing-table td:first-child {
+            width: 32%;
+        }
+
+        .landing-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .landing-table tbody tr:hover {
+            background: rgba(4, 69, 172, 0.03);
+        }
+
+        .landing-table a {
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+        }
+
+        .landing-table a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .landing-table .has-leads {
+            background: #eef0f3;
+            color: #1d1d1f;
+            font-weight: 600;
+        }
+
+        .highlight-callout {
+            background: linear-gradient(135deg, rgba(52, 199, 89, 0.08) 0%, rgba(48, 209, 88, 0.05) 100%);
+            border-left: 4px solid #34c759;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin: 24px 0;
+            box-shadow: 0 2px 12px rgba(52, 199, 89, 0.08);
+        }
+
+        .highlight-callout-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #1d1d1f;
+        }
+
+        .benchmark-box {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .benchmark-text {
+            font-size: 14px;
+            color: rgba(29, 29, 31, 0.7);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .benchmark-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: -0.02em;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            margin: 32px 0;
+        }
+
+        .data-table thead {
+            background: linear-gradient(180deg, #f8f9fb 0%, #f0f2f5 100%);
+        }
+
+        .data-table th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(29, 29, 31, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .data-table td {
+            padding: 14px 20px;
+            font-size: 15px;
+            color: #1d1d1f;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .label-cell {
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .data-cell {
+            font-weight: 500;
+            color: rgba(29, 29, 31, 0.8);
+        }
+
+        .cvr-cell {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .input-field {
+            width: 100%;
+            max-width: 120px;
+            padding: 8px 12px;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            color: #1d1d1f;
+            background: #ffffff;
+            border: 1.5px solid rgba(0, 0, 0, 0.12);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(4, 69, 172, 0.1);
+        }
+
+        .text-area {
+            width: 100%;
+            min-height: 140px;
+            padding: 18px;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            color: #1d1d1f;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1.5px solid rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            resize: vertical;
+            transition: all 0.2s ease;
+            line-height: 1.6;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .text-area:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(4, 69, 172, 0.1), 0 2px 12px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+        }
+
+        .text-area::placeholder {
+            color: rgba(60, 60, 67, 0.6);
+        }
+
+        .section-header {
+            font-size: clamp(28px, 3.5vw, 36px);
+            color: #1d1d1f;
+            font-weight: 700;
+            margin-bottom: 20px;
+            margin-top: 64px;
+            letter-spacing: -0.02em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 32px 24px;
+            }
+
+            .table-scroll {
+                overflow-x: auto;
+            }
+
+            .sources-table,
+            .landing-table,
+            .data-table {
+                font-size: 14px;
+            }
+
+            .sources-table th,
+            .sources-table td,
+            .landing-table th,
+            .landing-table td,
+            .data-table th,
+            .data-table td {
+                padding: 12px 16px;
+            }
+        }
+
         .sidebar::-webkit-scrollbar {
             width: 0;
             height: 0;
@@ -447,6 +816,11 @@
             <h2>Lead Sources Breakdown</h2>
             <div class="year-badge">📅 Jan 1, 2025 - Oct 25, 2025</div>
             
+            <!-- Line Graph -->
+            <div class="chart-container">
+                <canvas id="leadsChart"></canvas>
+            </div>
+            
             <table class="sources-table">
                 <thead>
                     <tr>
@@ -508,6 +882,148 @@
                     💡 <strong>Key Insight:</strong> Over half (51.10%) of total leads are qualified leads - 
                     demonstrating high-quality traffic and effective lead generation!
                 </div>
+            </div>
+
+            <h2>Leads by Landing Page (Organic SEO)</h2>
+            <div class="table-scroll">
+                <table class="landing-table">
+                    <thead>
+                        <tr>
+                            <th>SEO Landing Page</th>
+                            <th>Mar</th>
+                            <th>Apr</th>
+                            <th>May</th>
+                            <th>Jun</th>
+                            <th>Jul</th>
+                            <th>Aug</th>
+                            <th>Sep</th>
+                            <th>Oct</th>
+                            <th>Grand Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="source-name"><a href="https://oklahomalawyer.com/?utm_campaign=GoogleMyBusiness" target="_blank" rel="noopener noreferrer">https://oklahomalawyer.com/?utm_campaign=GoogleMyBusiness</a></td>
+                            <td>-</td>
+                            <td><span class="has-leads">4</span></td>
+                            <td><span class="has-leads">10</span></td>
+                            <td><span class="has-leads">8</span></td>
+                            <td><span class="has-leads">7</span></td>
+                            <td><span class="has-leads">8</span></td>
+                            <td><span class="has-leads">6</span></td>
+                            <td><span class="has-leads">11</span></td>
+                            <td>54</td>
+                        </tr>
+                        <tr>
+                            <td class="source-name"><a href="https://oklahomalawyer.com/oklahoma-city-governmental-tort-claims/" target="_blank" rel="noopener noreferrer">https://oklahomalawyer.com/oklahoma-city-governmental-tort-claims/</a></td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td><span class="has-leads">3</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">2</span></td>
+                            <td><span class="has-leads">1</span></td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td class="source-name"><a href="https://oklahomalawyer.com/oklahoma-city-car-accident-lawyer/" target="_blank" rel="noopener noreferrer">https://oklahomalawyer.com/oklahoma-city-car-accident-lawyer/</a></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">2</span></td>
+                            <td>-</td>
+                            <td><span class="has-leads">4</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td class="source-name"><a href="https://oklahomalawyer.com/" target="_blank" rel="noopener noreferrer">https://oklahomalawyer.com/</a></td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">2</span></td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td class="source-name"><a href="https://oklahomalawyer.com/oklahoma-city-car-accident-lawyer/how-much-compensation-for-a-car-accident/" target="_blank" rel="noopener noreferrer">https://oklahomalawyer.com/oklahoma-city-car-accident-lawyer/how-much-compensation-for-a-car-accident/</a></td>
+                            <td>-</td>
+                            <td><span class="has-leads">2</span></td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td class="source-name"><a href="https://oklahomalawyer.com/slip-and-fall-cases-against-walmart-oklahoma-city/" target="_blank" rel="noopener noreferrer">https://oklahomalawyer.com/slip-and-fall-cases-against-walmart-oklahoma-city/</a></td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">2</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td class="source-name"><a href="https://oklahomalawyer.com/oklahoma-city-car-accident-lawyer/totaled-vehicle/" target="_blank" rel="noopener noreferrer">https://oklahomalawyer.com/oklahoma-city-car-accident-lawyer/totaled-vehicle/</a></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td class="source-name"><a href="https://oklahomalawyer.com/blog/defective-medical-device-claims-guide/" target="_blank" rel="noopener noreferrer">https://oklahomalawyer.com/blog/defective-medical-device-claims-guide/</a></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td><span class="has-leads">1</span></td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td class="source-name"><a href="https://oklahomalawyer.com/oklahoma-city-slip-and-fall-lawyer/" target="_blank" rel="noopener noreferrer">https://oklahomalawyer.com/oklahoma-city-slip-and-fall-lawyer/</a></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><span class="has-leads">1</span></td>
+                            <td>-</td>
+                            <td><span class="has-leads">2</span></td>
+                            <td>3</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td class="source-name">Total</td>
+                            <td>1</td>
+                            <td>8</td>
+                            <td>15</td>
+                            <td>10</td>
+                            <td>16</td>
+                            <td>13</td>
+                            <td>8</td>
+                            <td>20</td>
+                            <td>91</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <!-- Industry Benchmark -->
@@ -574,8 +1090,8 @@
             </form>
 
             <!-- Issues/Concerns Section -->
-            <div style="margin-top: 50px;">
-                <h2 style="font-size: 28px; color: #2B4C7E; font-weight: 700; margin-bottom: 15px;">Issues/Concerns</h2>
+            <div>
+                <h2 class="section-header">Issues/Concerns</h2>
                 <textarea 
                     id="issues-concerns-page4" 
                     class="text-area"
@@ -585,8 +1101,8 @@
             </div>
 
             <!-- Action Items Section -->
-            <div style="margin-top: 30px;">
-                <h2 style="font-size: 28px; color: #2B4C7E; font-weight: 700; margin-bottom: 15px;">Action Items</h2>
+            <div>
+                <h2 class="section-header">Action Items</h2>
                 <textarea 
                     id="action-items-page4" 
                     class="text-area"
@@ -694,8 +1210,151 @@
 
 
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script>
+        // Create the line chart
+        const ctx = document.getElementById('leadsChart').getContext('2d');
+        const leadsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'],
+                datasets: [{
+                    // added a second line in legend label (assumption: show 'Monthly' on next line)
+                    label: 'Unique Leads\nMonthly',
+                    data: [1, 19, 19, 21, 23, 26, 15, 21],
+                    borderColor: '#0445ac',
+                    backgroundColor: 'rgba(4, 69, 172, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: '#0445ac',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointHoverBackgroundColor: '#0445ac',
+                    pointHoverBorderColor: '#ffffff',
+                    pointHoverBorderWidth: 3,
+                    datalabels: {
+                        align: 'top',
+                        anchor: 'end',
+                        offset: 8,
+                        font: {
+                            family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif',
+                            size: 13,
+                            weight: '600'
+                        },
+                        color: '#1d1d1f',
+                        formatter: function(value) {
+                            return value;
+                        }
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                aspectRatio: 2.5,
+                layout: {
+                    padding: {
+                        top: 30
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        align: 'start',
+                        labels: {
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif',
+                                size: 14,
+                                weight: '600'
+                            },
+                            color: '#1d1d1f',
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        },
+                        padding: {
+                            bottom: 20
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(29, 29, 31, 0.95)',
+                        titleFont: {
+                            family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif',
+                            size: 13,
+                            weight: '600'
+                        },
+                        bodyFont: {
+                            family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif',
+                            size: 14,
+                            weight: '500'
+                        },
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return 'Leads: ' + context.parsed.y;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        display: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif',
+                                size: 13
+                            },
+                            color: 'rgba(29, 29, 31, 0.7)',
+                            padding: 8
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.06)',
+                            drawBorder: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif',
+                                size: 13,
+                                weight: '500'
+                            },
+                            color: '#1d1d1f',
+                            padding: 8
+                        },
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" referrerpolicy="no-referrer"></script>
     <script src="pdf-export.js"></script>
 </body>
 </html>
+
