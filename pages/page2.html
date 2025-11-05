@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scope & Expectations | Hurwitz Law Group</title>
+    <style>
+        :root {
+            --sidebar-width: 240px;
+            --accent-color: #0071e3;
+            --accent-hover: #0077ed;
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --surface-white: #ffffff;
+            --surface-light: #f5f5f7;
+            --surface-lighter: #fbfbfd;
+            --border-subtle: rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --green-success: #34c759;
+            --red-warning: #ff3b30;
+            --orange-alert: #ff9500;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--surface-lighter);
+            min-height: 100vh;
+            display: flex;
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        nav.sidebar {
+            --sidebar-width: 240px;
+            --accent-color: #0445ac;
+            --text-primary: #0b1e3d;
+            --text-secondary: rgba(11, 30, 61, 0.72);
+            --surface-color: rgba(244, 246, 250, 0.82);
+            --surface-hover: rgba(4, 69, 172, 0.12);
+        }
+
+
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--surface-color);
+            height: 100vh;
+            min-height: 100vh;
+            padding: 32px 24px;
+            border-right: 1px solid rgba(60, 60, 67, 0.18);
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            backdrop-filter: blur(26px);
+        }
+
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(60, 60, 67, 0.12);
+        }
+
+        .sidebar-logo {
+            max-width: 72px;
+            height: auto;
+            filter: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+            align-items: flex-start;
+        }
+
+        .nav-item {
+            margin: 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            text-align: left;
+            width: 100%;
+            padding: 10px 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            filter: none;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: var(--surface-hover);
+            transform: translateX(6px);
+        }
+
+        .nav-link.active {
+            color: var(--accent-color);
+            background: rgba(10, 132, 255, 0.16);
+            box-shadow: inset 0 0 0 1px rgba(10, 132, 255, 0.32);
+            transform: translateX(6px);
+        }
+
+        .nav-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .nav-label {
+            flex: 1;
+            white-space: nowrap;
+        }
+
+        .nav-divider {
+            height: 1px;
+            background: rgba(60, 60, 67, 0.12);
+            margin: 28px 0 18px 0;
+            width: 100%;
+        }
+
+        .pdf-export-btn {
+            margin-top: auto;
+            padding-top: 18px;
+            border-top: 1px solid rgba(60, 60, 67, 0.12);
+        }
+
+        .pdf-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #0a84ff 0%, #5ac8fa 100%);
+            box-shadow: 0 12px 30px rgba(10, 132, 255, 0.35);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pdf-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 36px rgba(10, 132, 255, 0.45);
+        }
+
+        .header {
+            margin-bottom: 56px;
+            text-align: left;
+        }
+
+        .header h1 {
+            font-size: clamp(40px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color) 0%, #5ac8fa 100%);
+            border-radius: 2px;
+            margin: 0;
+        }
+
+.main-content {
+            margin-left: var(--sidebar-width);
+            padding: 0;
+            width: calc(100% - var(--sidebar-width));
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: clamp(48px, 8vw, 88px) clamp(24px, 3vw, 48px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #0077ed 100%);
+            border-radius: 20px;
+            padding: 64px 48px;
+            margin-bottom: 48px;
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .section-subheader {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 113, 227, 0.08) 0%, rgba(0, 119, 237, 0.05) 100%);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 32px;
+        }
+
+        .highlight-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .highlight-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .info-card {
+            background: var(--surface-lighter);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: var(--surface-white);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-2px);
+        }
+
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .info-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .info-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .info-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Focus Areas */
+        .focus-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .focus-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .focus-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .focus-item {
+            background: var(--surface-lighter);
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .focus-item:hover {
+            background: var(--surface-white);
+            box-shadow: var(--shadow-sm);
+            transform: translateX(4px);
+        }
+
+        .focus-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .focus-content {
+            flex: 1;
+        }
+
+        .focus-name {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .focus-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Wins Section */
+        .wins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .win-card {
+            background: linear-gradient(135deg, rgba(52, 199, 89, 0.1) 0%, rgba(52, 199, 89, 0.05) 100%);
+            border-left: 4px solid var(--green-success);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .win-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .win-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--green-success);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .win-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .win-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .win-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Roadblocks Section */
+        .roadblock-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .roadblock-item {
+            background: linear-gradient(135deg, rgba(255, 59, 48, 0.08) 0%, rgba(255, 59, 48, 0.04) 100%);
+            border-left: 4px solid var(--red-warning);
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: start;
+            gap: 16px;
+        }
+
+        .roadblock-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--red-warning);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .roadblock-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .roadblock-content {
+            flex: 1;
+        }
+
+        .roadblock-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .roadblock-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            background: linear-gradient(135deg, rgba(255, 149, 0, 0.1) 0%, rgba(255, 149, 0, 0.05) 100%);
+            border-left: 4px solid var(--orange-alert);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: start;
+            gap: 16px;
+        }
+
+        .alert-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--orange-alert);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .alert-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .alert-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Notes Section */
+        .text-area {
+            width: 100%;
+            min-height: 120px;
+            padding: 16px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+            color: var(--text-primary);
+            background: var(--surface-lighter);
+            resize: vertical;
+            transition: all 0.2s ease;
+        }
+
+        .text-area:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: var(--surface-white);
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+        }
+
+        .text-area::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        /* Summary Grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .summary-item {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 16px;
+            padding: 24px;
+            background: var(--surface-lighter);
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .summary-item:hover {
+            background: var(--surface-white);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .summary-item.highlight-win {
+            background: linear-gradient(135deg, rgba(52, 199, 89, 0.08) 0%, rgba(52, 199, 89, 0.04) 100%);
+            border-left: 4px solid var(--green-success);
+        }
+
+        .summary-item.highlight-roadblock {
+            background: linear-gradient(135deg, rgba(255, 59, 48, 0.08) 0%, rgba(255, 59, 48, 0.04) 100%);
+            border-left: 4px solid var(--red-warning);
+        }
+
+        .summary-item.highlight-notice {
+            background: linear-gradient(135deg, rgba(255, 149, 0, 0.08) 0%, rgba(255, 149, 0, 0.04) 100%);
+            border-left: 4px solid var(--orange-alert);
+        }
+
+        .summary-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .summary-icon.success {
+            background: linear-gradient(135deg, var(--green-success), #30d158);
+        }
+
+        .summary-icon.warning {
+            background: linear-gradient(135deg, var(--red-warning), #ff453a);
+        }
+
+        .summary-icon.alert {
+            background: linear-gradient(135deg, var(--orange-alert), #ffb340);
+        }
+
+        .summary-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .summary-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .summary-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .summary-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+        <div class="sidebar-header">
+            <img src="https://lionheadmarketing.com/wp-content/uploads/2023/05/cropped-LHD_Favicon-1-192x192.png" alt="Lion Head Digital" class="sidebar-logo">
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="page1.html" class="nav-link" data-page="page1.html" title="High Level Strategy">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="8" />
+                        <path d="M8.5 15.5l7-7" />
+                        <path d="M14.5 8h3v3" />
+                        <path d="M11 11l2 2" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">High Level Strategy</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page2.html" class="nav-link" data-page="page2.html" title="Executive Summary">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="5" y="3" width="14" height="18" rx="2" />
+                        <path d="M9 7h6" />
+                        <path d="M8 11h8" />
+                        <path d="M8 14l2.2-2.2 1.8 1.4 3-3" />
+                        <path d="M8 18h8" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Executive Summary</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page3.html" class="nav-link" data-page="page3.html" title="Client Goals">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="8" />
+                        <circle cx="12" cy="12" r="4.5" />
+                        <path d="M12 7v2" />
+                        <path d="M12 15v2" />
+                        <path d="M7 12h2" />
+                        <path d="M15 12h2" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Client Goals</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page4.html" class="nav-link" data-page="page4.html" title="Wins">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 6h6" />
+                        <path d="M8 7v1a4 4 0 0 0 4 4 4 4 0 0 0 4-4V7" />
+                        <path d="M10 14h4" />
+                        <path d="M9 17h6" />
+                        <path d="M8 21h8" />
+                        <path d="M5.5 8H8" />
+                        <path d="M16 8h2.5" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Wins</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page5.html" class="nav-link" data-page="page5.html" title="Leads & Conversion">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 16l3.5-3.5 3 3L19 8" />
+                        <path d="M16 7h3v3" />
+                        <path d="M5 20h14" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Leads & Conversion</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page6.html" class="nav-link" data-page="page6.html" title="Issues & Challenges">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 5l7 12H5z" />
+                        <path d="M12 11v3" />
+                        <path d="M12 17h.01" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Issues & Challenges</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page7.html" class="nav-link" data-page="page7.html" title="Competition">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 4h10v3a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4z" />
+                        <path d="M12 11v3" />
+                        <path d="M10 17h4" />
+                        <path d="M9 20h6" />
+                        <path d="M7 7H5a2 2 0 0 0 2 2" />
+                        <path d="M17 7h2a2 2 0 0 1-2 2" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Competition</span>
+                </a>
+            </li>
+            <li class="nav-divider" aria-hidden="true"></li>
+            <li class="nav-item">
+                <a href="page8.html" class="nav-link" data-page="page8.html" title="HLS Overview">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="16" rx="2" />
+                        <path d="M3 10h18" />
+                        <path d="M9 10v10" />
+                        <path d="M15 10v10" />
+                        <path d="M9 14h3" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">HLS Overview</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page9.html" class="nav-link" data-page="page9.html" title="GBP Reviews">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 21c-3.7-3.5-5.5-6.2-5.5-9.3a5.5 5.5 0 1 1 11 0c0 3.1-1.8 5.8-5.5 9.3z" />
+                        <path d="M12 9.2l1 2h2.2l-1.8 1.2.6 2-2-1.5-2 1.5.6-2-1.8-1.2H11z" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">GBP Reviews</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page10.html" class="nav-link" data-page="page10.html" title="Content">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M8 4h6l4 4v10a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" />
+                        <path d="M14 4v4h4" />
+                        <path d="M9 13h6" />
+                        <path d="M9 17h5" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Content</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page11.html" class="nav-link" data-page="page11.html" title="Backlinks">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9.5 14.5l-2 2a3.5 3.5 0 1 1-5-5l3-3" />
+                        <path d="M14.5 9.5l2-2a3.5 3.5 0 1 1 5 5l-3 3" />
+                        <path d="M9 9l6 6" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Backlinks</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page12.html" class="nav-link" data-page="page12.html" title="Brand Name">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 5h6l6 6-6 6H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+                        <circle cx="9.5" cy="9.5" r="1.5" />
+                        <path d="M13.5 12.5l1.1 2.1 2.3.3-1.7 1.7.4 2.3-2.1-1.1-2.1 1.1.4-2.3-1.7-1.7 2.3-.3z" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Brand Name</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page13.html" class="nav-link" data-page="page13.html" title="E-E-A-T">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3 5 6v6c0 5 3.5 8.5 7 9 3.5-.5 7-4 7-9V6z" />
+                        <path d="M12 10.5l1 2 2.2.3-1.6 1.6.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.6 2.2-.3z" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">E-E-A-T</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page14.html" class="nav-link" data-page="page14.html" title="Optimizing for AI">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9.5 4.5a3.5 3.5 0 0 0-3.5 3.5v7a3.5 3.5 0 0 0 3.5 3.5H11V4.5z" />
+                        <path d="M14.5 4.5H13v14h1.5a3.5 3.5 0 0 0 3.5-3.5v-7a3.5 3.5 0 0 0-3.5-3.5z" />
+                        <path d="M9 9h2" />
+                        <path d="M13 9h2" />
+                        <path d="M9 12h2.5" />
+                        <path d="M13 12h3" />
+                        <path d="M9 15h2" />
+                        <path d="M13 15h2.5" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Optimizing for AI</span>
+                </a>
+            </li>
+            <li class="nav-divider" aria-hidden="true"></li>
+            <li class="nav-item">
+                <a href="page15.html" class="nav-link" data-page="page15.html" title="Client Action Items">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 6h9" />
+                        <path d="M5 12h9" />
+                        <path d="M5 18h9" />
+                        <path d="M16 7l2 2L22 5" />
+                        <path d="M16 13l2 2L22 11" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Client Action Items</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page16.html" class="nav-link" data-page="page16.html" title="LHD Action Items">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 5.5A2.5 2.5 0 0 1 8.5 3H20v15h-11.5A2.5 2.5 0 0 0 6 20.5z" />
+                        <path d="M6 20.5A2.5 2.5 0 0 1 3.5 18V5.5A2.5 2.5 0 0 1 6 3h11" />
+                        <path d="M9 7.5h7" />
+                        <path d="M9 11h7" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">LHD Action Items</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page17.html" class="nav-link" data-page="page17.html" title="Client Feedback">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M19 15a3 3 0 0 1-3 3H9l-4 4v-4H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3z" />
+                        <path d="M8 9.5h7" />
+                        <path d="M8 13h4" />
+                        <circle cx="16.5" cy="12" r="1.5" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Client Feedback</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page18.html" class="nav-link" data-page="page18.html" title="CU Deployment">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 11l7-7 7 7" />
+                        <path d="M6 15.5l6 4.5 6-4.5" />
+                        <path d="M8.5 12.5l3.5 2.5 3.5-2.5" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">CU Deployment</span>
+                </a>
+            </li>
+        </ul>
+        <div class="nav-divider"></div>
+        <div class="pdf-export-btn">
+            <a href="#" class="pdf-link" onclick="exportToPDF(); return false;" title="Export to PDF">
+                <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M14 3H9a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h11" />
+                        <path d="M14 3l5 5" />
+                        <path d="M14 3v5h5" />
+                        <path d="M12 14v7" />
+                        <path d="M9.5 18.5L12 21l2.5-2.5" />
+                    </svg>
+                </span>
+                <span class="nav-label">Export PDF</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <h1>Scope & Expectations</h1>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Executive Summary Card -->
+            <div class="card">
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-title">HLS is done every 3 months</h3>
+                        <p class="summary-text">Part of a broader, ongoing SEO roadmap</p>
+                    </div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="summary-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-title">Results Timeline</h3>
+                        <p class="summary-text">SEO outcomes often take several weeks to months to reflect</p>
+                    </div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="summary-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-title">Core Focus</h3>
+                        <p class="summary-text">6 core focus with 19 different action items</p>
+                    </div>
+                </div>
+
+                <div class="summary-item highlight-win">
+                    <div class="summary-icon success">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-title">Wins</h3>
+                        <p class="summary-text">Maps Rankings & Organic for Criminal Defense Keywords</p>
+                    </div>
+                </div>
+
+                <div class="summary-item highlight-roadblock">
+                    <div class="summary-icon warning">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-title">Roadblocks & Challenges</h3>
+                        <p class="summary-text">Logins and 3 Technical issues</p>
+                    </div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="summary-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-title">Location & Case Type Prioritization</h3>
+                        <p class="summary-text">7 Pages per month</p>
+                    </div>
+                </div>
+
+                <div class="summary-item highlight-notice">
+                    <div class="summary-icon alert">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <div class="summary-content">
+                        <h3 class="summary-title">Report Scope</h3>
+                        <p class="summary-text">No deep dive into metrics and leads</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Active page highlighting
+        document.addEventListener('DOMContentLoaded', () => {
+            const current = (window.location.pathname.split('/').pop() || 's&e.html').toLowerCase();
+            document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+                if ((link.dataset.page || '').toLowerCase() === current) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" referrerpolicy="no-referrer"></script>
+    <script src="pdf-export.js"></script>
+</body>
+</html>

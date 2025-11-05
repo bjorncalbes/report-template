@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Issues & Challenges - Hurwitz Law Group</title>
+    <title>Client Goals - Hurwitz Law Group</title>
     <style>
         :root {
             --sidebar-width: 240px;
@@ -167,10 +167,174 @@
 
         .main-content {
             margin-left: var(--sidebar-width);
-            padding: 48px;
+            padding: 0;
+            width: calc(100% - var(--sidebar-width));
+            min-height: 100vh;
+            background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 50%, #fafbfc 100%);
         }
 
-    
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: clamp(48px, 8vw, 88px) clamp(32px, 5vw, 64px);
+        }
+
+        .header {
+            margin-bottom: 56px;
+            text-align: left;
+        }
+
+        .header h1 {
+            font-size: clamp(40px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color) 0%, #5ac8fa 100%);
+            border-radius: 2px;
+            margin: 0;
+        }
+
+        #goalsForm {
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        .question-block {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .question-block:hover {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .question {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+        }
+
+        .answer-field {
+            width: 100%;
+            min-height: 120px;
+            padding: 16px;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            color: #1d1d1f;
+            background: #ffffff;
+            border: 1.5px solid rgba(0, 0, 0, 0.12);
+            border-radius: 12px;
+            resize: vertical;
+            transition: all 0.2s ease;
+            line-height: 1.6;
+        }
+
+        .answer-field:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(4, 69, 172, 0.1);
+        }
+
+        .answer-field::placeholder {
+            color: rgba(60, 60, 67, 0.6);
+        }
+
+        .save-notification {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(52, 199, 89, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .save-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            font-size: clamp(28px, 3.5vw, 36px);
+            color: #1d1d1f;
+            font-weight: 700;
+            margin-bottom: 20px;
+            margin-top: 64px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(4, 69, 172, 0), rgba(4, 69, 172, 0.2), rgba(4, 69, 172, 0));
+            border-radius: 999px;
+            margin: 40px 0;
+            box-shadow: 0 12px 24px rgba(4, 69, 172, 0.08);
+        }
+
+        .notes-textarea {
+            width: 100%;
+            min-height: 140px;
+            padding: 18px;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            color: #1d1d1f;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1.5px solid rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            resize: vertical;
+            transition: all 0.2s ease;
+            line-height: 1.6;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .notes-textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(4, 69, 172, 0.1), 0 2px 12px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+        }
+
+        .notes-textarea::placeholder {
+            color: rgba(60, 60, 67, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 32px 24px;
+            }
+
+            .question-block {
+                padding: 24px;
+            }
+
+            .section-header {
+                margin-top: 48px;
+            }
+        }
+
         .sidebar::-webkit-scrollbar {
             width: 0;
             height: 0;
@@ -183,7 +347,7 @@
     </style>
 </head>
 <body>
-    <nav class="sidebar">
+        <nav class="sidebar">
         <div class="sidebar-header">
             <img src="https://lionheadmarketing.com/wp-content/uploads/2023/05/cropped-LHD_Favicon-1-192x192.png" alt="Lion Head Digital" class="sidebar-logo">
         </div>
@@ -202,7 +366,21 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page2.html" class="nav-link" data-page="page2.html" title="Client Goals">
+                <a href="page2.html" class="nav-link" data-page="page2.html" title="Executive Summary">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="5" y="3" width="14" height="18" rx="2" />
+                        <path d="M9 7h6" />
+                        <path d="M8 11h8" />
+                        <path d="M8 14l2.2-2.2 1.8 1.4 3-3" />
+                        <path d="M8 18h8" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Executive Summary</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page3.html" class="nav-link" data-page="page3.html" title="Client Goals">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <circle cx="12" cy="12" r="8" />
@@ -217,7 +395,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page3.html" class="nav-link" data-page="page3.html" title="Wins">
+                <a href="page4.html" class="nav-link" data-page="page4.html" title="Wins">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M9 6h6" />
@@ -233,7 +411,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page4.html" class="nav-link" data-page="page4.html" title="Leads & Conversion">
+                <a href="page5.html" class="nav-link" data-page="page5.html" title="Leads & Conversion">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M5 16l3.5-3.5 3 3L19 8" />
@@ -245,7 +423,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page5.html" class="nav-link" data-page="page5.html" title="Issues & Challenges">
+                <a href="page6.html" class="nav-link" data-page="page6.html" title="Issues & Challenges">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12 5l7 12H5z" />
@@ -257,13 +435,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page6.html" class="nav-link" data-page="page6.html" title="Competition">
+                <a href="page7.html" class="nav-link" data-page="page7.html" title="Competition">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="9.5" cy="9.5" r="4.5" />
-                        <circle cx="17" cy="17" r="3" />
-                        <path d="M12.5 12.5l2.5 2.5" />
-                        <path d="M6.5 12h4" />
+                        <path d="M7 4h10v3a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4z" />
+                        <path d="M12 11v3" />
+                        <path d="M10 17h4" />
+                        <path d="M9 20h6" />
+                        <path d="M7 7H5a2 2 0 0 0 2 2" />
+                        <path d="M17 7h2a2 2 0 0 1-2 2" />
                     </svg>
                     </span>
                     <span class="nav-label">Competition</span>
@@ -271,20 +451,21 @@
             </li>
             <li class="nav-divider" aria-hidden="true"></li>
             <li class="nav-item">
-                <a href="page7.html" class="nav-link" data-page="page7.html" title="HLS Overview">
+                <a href="page8.html" class="nav-link" data-page="page8.html" title="HLS Overview">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M9 5V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V5" />
-                        <rect x="7" y="5" width="10" height="14" rx="2" />
-                        <path d="M10 10h6" />
-                        <path d="M10 14h6" />
+                        <rect x="3" y="4" width="18" height="16" rx="2" />
+                        <path d="M3 10h18" />
+                        <path d="M9 10v10" />
+                        <path d="M15 10v10" />
+                        <path d="M9 14h3" />
                     </svg>
                     </span>
                     <span class="nav-label">HLS Overview</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page8.html" class="nav-link" data-page="page8.html" title="GBP Reviews">
+                <a href="page9.html" class="nav-link" data-page="page9.html" title="GBP Reviews">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12 21c-3.7-3.5-5.5-6.2-5.5-9.3a5.5 5.5 0 1 1 11 0c0 3.1-1.8 5.8-5.5 9.3z" />
@@ -295,7 +476,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page9.html" class="nav-link" data-page="page9.html" title="Content">
+                <a href="page10.html" class="nav-link" data-page="page10.html" title="Content">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M8 4h6l4 4v10a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" />
@@ -308,7 +489,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page10.html" class="nav-link" data-page="page10.html" title="Backlinks">
+                <a href="page11.html" class="nav-link" data-page="page11.html" title="Backlinks">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M9.5 14.5l-2 2a3.5 3.5 0 1 1-5-5l3-3" />
@@ -320,46 +501,40 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page11.html" class="nav-link" data-page="page11.html" title="Brand Name">
+                <a href="page12.html" class="nav-link" data-page="page12.html" title="Brand Name">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <rect x="3" y="4" width="18" height="12" rx="3" />
-                        <path d="M12 16v3.5" />
-                        <path d="M8 20h8" />
-                        <circle cx="15" cy="9" r="2.5" />
-                        <path d="M16.8 10.8l2.2 2.2" />
+                        <path d="M7 5h6l6 6-6 6H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+                        <circle cx="9.5" cy="9.5" r="1.5" />
+                        <path d="M13.5 12.5l1.1 2.1 2.3.3-1.7 1.7.4 2.3-2.1-1.1-2.1 1.1.4-2.3-1.7-1.7 2.3-.3z" />
                     </svg>
                     </span>
                     <span class="nav-label">Brand Name</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page12.html" class="nav-link" data-page="page12.html" title="E-E-A-T">
+                <a href="page13.html" class="nav-link" data-page="page13.html" title="E-E-A-T">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 3l8 3v6c0 5.4-3.8 9.6-8 11-4.2-1.4-8-5.6-8-11V6l8-3z" />
-                        <path d="M9.5 11.5h5" />
-                        <path d="M12 9v5.5" />
+                        <path d="M12 3 5 6v6c0 5 3.5 8.5 7 9 3.5-.5 7-4 7-9V6z" />
+                        <path d="M12 10.5l1 2 2.2.3-1.6 1.6.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.6 2.2-.3z" />
                     </svg>
                     </span>
                     <span class="nav-label">E-E-A-T</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page13.html" class="nav-link" data-page="page13.html" title="Optimizing for AI">
+                <a href="page14.html" class="nav-link" data-page="page14.html" title="Optimizing for AI">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="12" r="3" />
-                        <circle cx="5" cy="7" r="2.2" />
-                        <circle cx="19" cy="7" r="2.2" />
-                        <circle cx="7" cy="19" r="2.2" />
-                        <circle cx="18" cy="18" r="2.2" />
-                        <path d="M7 17.2l3-3.2" />
-                        <path d="M17.2 16l-2.7-2.2" />
-                        <path d="M7.2 9.2l2.6 1.6" />
-                        <path d="M16.8 9.2l-2.6 1.6" />
-                        <path d="M7 7l5-2" />
-                        <path d="M17 7l-5-2" />
+                        <path d="M9.5 4.5a3.5 3.5 0 0 0-3.5 3.5v7a3.5 3.5 0 0 0 3.5 3.5H11V4.5z" />
+                        <path d="M14.5 4.5H13v14h1.5a3.5 3.5 0 0 0 3.5-3.5v-7a3.5 3.5 0 0 0-3.5-3.5z" />
+                        <path d="M9 9h2" />
+                        <path d="M13 9h2" />
+                        <path d="M9 12h2.5" />
+                        <path d="M13 12h3" />
+                        <path d="M9 15h2" />
+                        <path d="M13 15h2.5" />
                     </svg>
                     </span>
                     <span class="nav-label">Optimizing for AI</span>
@@ -367,7 +542,7 @@
             </li>
             <li class="nav-divider" aria-hidden="true"></li>
             <li class="nav-item">
-                <a href="page14.html" class="nav-link" data-page="page14.html" title="Client Action Items">
+                <a href="page15.html" class="nav-link" data-page="page15.html" title="Client Action Items">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M5 6h9" />
@@ -381,7 +556,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page15.html" class="nav-link" data-page="page15.html" title="Action Items">
+                <a href="page16.html" class="nav-link" data-page="page16.html" title="LHD Action Items">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M6 5.5A2.5 2.5 0 0 1 8.5 3H20v15h-11.5A2.5 2.5 0 0 0 6 20.5z" />
@@ -390,11 +565,11 @@
                         <path d="M9 11h7" />
                     </svg>
                     </span>
-                    <span class="nav-label">Action Items</span>
+                    <span class="nav-label">LHD Action Items</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page16.html" class="nav-link" data-page="page16.html" title="Client Feedback">
+                <a href="page17.html" class="nav-link" data-page="page17.html" title="Client Feedback">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M19 15a3 3 0 0 1-3 3H9l-4 4v-4H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3z" />
@@ -407,7 +582,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page17.html" class="nav-link" data-page="page17.html" title="CU Deployment">
+                <a href="page18.html" class="nav-link" data-page="page18.html" title="CU Deployment">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M5 11l7-7 7 7" />
@@ -439,143 +614,134 @@
     <div class="main-content">
         <div class="container">
             <div class="header">
-                <h1>Issues & Challenges ⚠️</h1>
+                <h1>Client Goals</h1>
                 <div class="divider"></div>
             </div>
 
-            <div class="issue-section">
-                <!-- Out of State Leads -->
-                <h2 class="sub-heading" style="color: #dc3545; border-left-color: #dc3545;">Out of State Leads</h2>
-                <div class="stat-highlight">
-                    📊 In the month of October <strong>27 out of 132 Leads</strong> are out of State
-                </div>
-                <div class="issue-text">
-                    September had 34 of 165 leads were out of state (20%). October is also 20%.
-                </div>
-
-                <!-- Google Rankings Volatility -->
-                <h2 class="sub-heading" style="color: #dc3545; border-left-color: #dc3545;">Rankings Not Stable Due to Google Updates</h2>
-                
-                <div class="diagram-container">
-                    
-                    <div class="volatility-diagram">
-                        <!-- Google System -->
-                        <div class="google-box">
-                            🔍 GOOGLE ALGORITHM CALIBRATION
-                        </div>
-                        <!-- Update Types -->
-                        <div class="update-boxes">
-                            <div class="update-box">
-                                <div class="update-box-title">Core Updates</div>
-                                <div class="update-box-text">Multiple updates since June</div>
-                            </div>
-                            <div class="update-box">
-                                <div class="update-box-title">Daily Changes</div>
-                                <div class="update-box-text">Micro-adjustments daily</div>
-                            </div>
-                            <div class="update-box">
-                                <div class="update-box-title">Competitor Activity</div>
-                                <div class="update-box-text">Maps and Organic</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Ranking Volatility Wave -->
-                        <svg class="ranking-wave" viewBox="0 0 800 150">
-                            <defs>
-                                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#dc3545;stop-opacity:1" />
-                                    <stop offset="50%" style="stop-color:#ffc107;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#dc3545;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            
-                            <!-- Fluctuating ranking line -->
-                            <path class="wave-line" d="M 50 100 Q 150 40, 250 80 T 450 60 T 650 90 T 750 70" stroke="url(#waveGradient)" />
-                            
-                            <!-- Labels -->
-                            <text x="50" y="130" class="wave-label">Week 1</text>
-                            <text x="250" y="130" class="wave-label">Week 2</text>
-                            <text x="450" y="130" class="wave-label">Week 3</text>
-                            <text x="650" y="130" class="wave-label">Week 4</text>
-                            
-                            <!-- Ranking positions -->
-                            <text x="10" y="45" class="wave-label" style="fill: #4caf50;">Rank 1</text>
-                            <text x="10" y="75" class="wave-label">Rank 3</text>
-                            <text x="10" y="105" class="wave-label" style="fill: #dc3545;">Rank 5</text>
-                            
-                            <!-- Dots on the line -->
-                            <circle cx="50" cy="100" r="6" fill="#dc3545" />
-                            <circle cx="250" cy="80" r="6" fill="#ffc107" />
-                            <circle cx="450" cy="60" r="6" fill="#4caf50" />
-                            <circle cx="650" cy="90" r="6" fill="#dc3545" />
-                        </svg>
-                        
-                        <!-- Result -->
-                        <div class="result-box">
-                            <div class="result-title">⚠️ SERP VOLATILITY</div>
-                            <div class="result-text">
-                                Rankings fluctuate constantly
-                            </div>
-                        </div>
+            <form id="goalsForm">
+                <div class="question-block">
+                    <div class="question">
+                        1. If everything was perfect in your business & life, what would success look like for your firm over the next 6 to 12 months?
                     </div>
+                    <textarea class="answer-field" id="question1" placeholder="Enter your answer here..." onblur="autoSaveGoals()"></textarea>
                 </div>
-                
-                <div class="issue-text">
-                    Google's continuous algorithm calibration and system updates create inherent ranking instability. 
-                    This SERP volatility is a normal part of the SEO landscape and requires ongoing monitoring, 
-                    adaptation, and strategic adjustments to maintain visibility.
-                </div>
-            </div>
 
+                <div class="question-block">
+                    <div class="question">
+                        2. How many new cases do you sign up on average each month now?
+                    </div>
+                    <textarea class="answer-field" id="question2" placeholder="Enter your answer here..." onblur="autoSaveGoals()"></textarea>
+                </div>
+
+                <div class="question-block">
+                    <div class="question">
+                        3. How many new cases do you want to sign up monthly (if marketing was 10/10)?
+                    </div>
+                    <textarea class="answer-field" id="question3" placeholder="Enter your answer here..." onblur="autoSaveGoals()"></textarea>
+                </div>
+
+                
+                <div class="save-notification" id="saveNotification">
+                    ✓ Responses saved successfully!
+                </div>
+            </form>
+        
             <!-- Issues/Concerns Section -->
-            <div style="margin-top: 50px;">
-                <h2 style="font-size: 28px; color: #2B4C7E; font-weight: 700; margin-bottom: 15px;">Issues/Concerns</h2>
+            <div class="section-divider" aria-hidden="true"></div>
+            
+            <div>
+                <h2 class="section-header">Issues/Concerns</h2>
                 <textarea 
-                    id="issues-concerns-page5" 
-                    class="text-area"
+                    id="issues-concerns-page2" 
+                    onblur="autoSavePage2()" 
                     placeholder="Enter any issues or concerns here..."
-                    onblur="autoSavePage5()"
-                    style="width: 100%; min-height: 120px; padding: 15px; font-size: 16px; font-family: Arial, sans-serif; border: 2px solid #c3cfe2; border-radius: 10px; resize: vertical;"
+                    class="notes-textarea"
                 ></textarea>
             </div>
 
             <!-- Action Items Section -->
-            <div style="margin-top: 30px;">
-                <h2 style="font-size: 28px; color: #2B4C7E; font-weight: 700; margin-bottom: 15px;">Action Items</h2>
+            <div>
+                <h2 class="section-header">Action Items</h2>
                 <textarea 
-                    id="action-items-page5" 
-                    class="text-area"
+                    id="action-items-page2" 
+                    onblur="autoSavePage2()" 
                     placeholder="Enter action items here..."
-                    onblur="autoSavePage5()"
-                    style="width: 100%; min-height: 120px; padding: 15px; font-size: 16px; font-family: Arial, sans-serif; border: 2px solid #c3cfe2; border-radius: 10px; resize: vertical;"
+                    class="notes-textarea"
                 ></textarea>
             </div>
-        </div>
+
+            
+            
+</div>
     </div>
 
     <script>
-        // Load saved notes on page load
+        // Load saved responses on page load
         window.addEventListener('DOMContentLoaded', function() {
-            const savedNotes = localStorage.getItem('page5Notes');
+            const savedData = localStorage.getItem('clientGoals');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                document.getElementById('question1').value = data.question1 || '';
+                document.getElementById('question2').value = data.question2 || '';
+                document.getElementById('question3').value = data.question3 || '';
+            }
+        });
+
+        // Auto-save function for goals
+        function autoSaveGoals() {
+            const data = {
+                question1: document.getElementById('question1').value,
+                question2: document.getElementById('question2').value,
+                question3: document.getElementById('question3').value
+            };
+
+            localStorage.setItem('clientGoals', JSON.stringify(data));
+        }
+
+        // Save responses
+        document.getElementById('goalsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                question1: document.getElementById('question1').value,
+                question2: document.getElementById('question2').value,
+                question3: document.getElementById('question3').value
+            };
+
+            localStorage.setItem('clientGoals', JSON.stringify(data));
+            
+            // Show notification
+            const notification = document.getElementById('saveNotification');
+            notification.classList.add('show');
+            setTimeout(function() {
+                notification.classList.remove('show');
+            }, 3000);
+        });
+    
+        // Load saved notes on page load for PAGE2
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedNotes = localStorage.getItem('page2Notes');
             if (savedNotes) {
                 const notes = JSON.parse(savedNotes);
                 if (notes.issues) {
-                    document.getElementById('issues-concerns-page5').value = notes.issues;
+                    document.getElementById('issues-concerns-page2').value = notes.issues;
                 }
                 if (notes.actions) {
-                    document.getElementById('action-items-page5').value = notes.actions;
+                    document.getElementById('action-items-page2').value = notes.actions;
                 }
             }
         });
 
-        function autoSavePage5() {
+        function autoSavePage2() {
             const notes = {
-                issues: document.getElementById('issues-concerns-page5').value,
-                actions: document.getElementById('action-items-page5').value
+                issues: document.getElementById('issues-concerns-page2').value,
+                actions: document.getElementById('action-items-page2').value
             };
             
-            localStorage.setItem('page5Notes', JSON.stringify(notes));
+            localStorage.setItem('page2Notes', JSON.stringify(notes));
         }
+    
+
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

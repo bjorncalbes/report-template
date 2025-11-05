@@ -1,0 +1,60 @@
+# Project Rules for Cursor AI
+
+## Changelog Requirements
+
+When making changes to this project, ALWAYS update the CHANGELOG.md file:
+
+1. **Include the "Requested" section**: Document what the user asked for, including:
+   - The original request/question
+   - Any specific considerations or constraints mentioned
+   - Context about why the change was needed
+
+2. **Format**: Use the standard format with sections:
+   - Requested (what user asked for)
+   - Added (new features)
+   - Changed (modifications)
+   - Deprecated (soon-to-be removed)
+   - Removed (deleted features)
+   - Fixed (bug fixes)
+   - Security (security improvements)
+
+3. **Timestamps**: Use [YYYY-MM-DD] format for dates
+
+4. **Location**: Add new entries at the TOP of the changelog, under [Unreleased] or a new date section
+
+5. **Details**: Be specific about what was changed, including file paths and folder structures
+
+## Project Structure
+
+- HTML pages go in `pages/` folder
+- Assets go in `assets/` folder:
+  - `assets/images/logos/` - Logo files
+  - `assets/images/screenshots/` - Reference screenshots
+  - `assets/images/content/` - Content images
+  - `assets/css/` - Stylesheets
+  - `assets/js/` - JavaScript files
+  - `assets/data/google-sheets/` - Google Sheets documentation
+  - `assets/data/references/` - PDFs and reference files
+- Reusable HTML components in `partials/` folder
+- Old/temp files in `archive/` folder
+
+## Code Style
+
+- Use semantic HTML
+- Keep CSS in external files when possible
+- Use relative paths from `pages/` directory (e.g., `../assets/css/styles.css`)
+- Sidebar navigation is loaded dynamically via `sidebar-loader.js`
+- Common CSS is in `assets/css/styles.css`
+
+## Documentation
+
+- Update relevant README files when adding new features
+- Document Google Sheets usage in `assets/data/google-sheets/README.md`
+- Keep CHANGELOG.md up to date with all changes
+
+## File Paths
+
+- When referencing assets from pages, use: `../assets/...`
+- When referencing pages from sidebar, use: `../pages/pageX.html`
+- When referencing partials from pages, use: `../partials/...`
+

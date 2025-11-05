@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Goals - Hurwitz Law Group</title>
+    <title>Page 17 - ClickUp Deployment Tasks | Hurwitz Law Group</title>
     <style>
         :root {
             --sidebar-width: 240px;
@@ -27,6 +27,16 @@
             display: flex;
             color: var(--text-primary);
         }
+        nav.sidebar {
+            --sidebar-width: 240px;
+            --accent-color: #0445ac;
+            --text-primary: #0b1e3d;
+            --text-secondary: rgba(11, 30, 61, 0.72);
+            --surface-color: rgba(244, 246, 250, 0.82);
+            --surface-hover: rgba(4, 69, 172, 0.12);
+        }
+
+
 
         .sidebar {
             width: var(--sidebar-width);
@@ -101,8 +111,8 @@
 
         .nav-link.active {
             color: var(--accent-color);
-            background: rgba(0, 113, 227, 0.16);
-            box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.35);
+            background: rgba(10, 132, 255, 0.16);
+            box-shadow: inset 0 0 0 1px rgba(10, 132, 255, 0.32);
             transform: translateX(6px);
         }
 
@@ -165,7 +175,7 @@
             box-shadow: 0 16px 36px rgba(10, 132, 255, 0.45);
         }
 
-        .main-content {
+.main-content {
             margin-left: var(--sidebar-width);
             padding: 48px;
         }
@@ -202,7 +212,21 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page2.html" class="nav-link" data-page="page2.html" title="Client Goals">
+                <a href="page2.html" class="nav-link" data-page="page2.html" title="Executive Summary">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="5" y="3" width="14" height="18" rx="2" />
+                        <path d="M9 7h6" />
+                        <path d="M8 11h8" />
+                        <path d="M8 14l2.2-2.2 1.8 1.4 3-3" />
+                        <path d="M8 18h8" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Executive Summary</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page3.html" class="nav-link" data-page="page3.html" title="Client Goals">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <circle cx="12" cy="12" r="8" />
@@ -217,7 +241,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page3.html" class="nav-link" data-page="page3.html" title="Wins">
+                <a href="page4.html" class="nav-link" data-page="page4.html" title="Wins">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M9 6h6" />
@@ -233,7 +257,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page4.html" class="nav-link" data-page="page4.html" title="Leads & Conversion">
+                <a href="page5.html" class="nav-link" data-page="page5.html" title="Leads & Conversion">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M5 16l3.5-3.5 3 3L19 8" />
@@ -245,7 +269,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page5.html" class="nav-link" data-page="page5.html" title="Issues & Challenges">
+                <a href="page6.html" class="nav-link" data-page="page6.html" title="Issues & Challenges">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12 5l7 12H5z" />
@@ -257,13 +281,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page6.html" class="nav-link" data-page="page6.html" title="Competition">
+                <a href="page7.html" class="nav-link" data-page="page7.html" title="Competition">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="9.5" cy="9.5" r="4.5" />
-                        <circle cx="17" cy="17" r="3" />
-                        <path d="M12.5 12.5l2.5 2.5" />
-                        <path d="M6.5 12h4" />
+                        <path d="M7 4h10v3a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4z" />
+                        <path d="M12 11v3" />
+                        <path d="M10 17h4" />
+                        <path d="M9 20h6" />
+                        <path d="M7 7H5a2 2 0 0 0 2 2" />
+                        <path d="M17 7h2a2 2 0 0 1-2 2" />
                     </svg>
                     </span>
                     <span class="nav-label">Competition</span>
@@ -271,20 +297,21 @@
             </li>
             <li class="nav-divider" aria-hidden="true"></li>
             <li class="nav-item">
-                <a href="page7.html" class="nav-link" data-page="page7.html" title="HLS Overview">
+                <a href="page8.html" class="nav-link" data-page="page8.html" title="HLS Overview">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M9 5V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V5" />
-                        <rect x="7" y="5" width="10" height="14" rx="2" />
-                        <path d="M10 10h6" />
-                        <path d="M10 14h6" />
+                        <rect x="3" y="4" width="18" height="16" rx="2" />
+                        <path d="M3 10h18" />
+                        <path d="M9 10v10" />
+                        <path d="M15 10v10" />
+                        <path d="M9 14h3" />
                     </svg>
                     </span>
                     <span class="nav-label">HLS Overview</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page8.html" class="nav-link" data-page="page8.html" title="GBP Reviews">
+                <a href="page9.html" class="nav-link" data-page="page9.html" title="GBP Reviews">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12 21c-3.7-3.5-5.5-6.2-5.5-9.3a5.5 5.5 0 1 1 11 0c0 3.1-1.8 5.8-5.5 9.3z" />
@@ -295,7 +322,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page9.html" class="nav-link" data-page="page9.html" title="Content">
+                <a href="page10.html" class="nav-link" data-page="page10.html" title="Content">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M8 4h6l4 4v10a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" />
@@ -308,7 +335,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page10.html" class="nav-link" data-page="page10.html" title="Backlinks">
+                <a href="page11.html" class="nav-link" data-page="page11.html" title="Backlinks">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M9.5 14.5l-2 2a3.5 3.5 0 1 1-5-5l3-3" />
@@ -320,46 +347,40 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page11.html" class="nav-link" data-page="page11.html" title="Brand Name">
+                <a href="page12.html" class="nav-link" data-page="page12.html" title="Brand Name">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <rect x="3" y="4" width="18" height="12" rx="3" />
-                        <path d="M12 16v3.5" />
-                        <path d="M8 20h8" />
-                        <circle cx="15" cy="9" r="2.5" />
-                        <path d="M16.8 10.8l2.2 2.2" />
+                        <path d="M7 5h6l6 6-6 6H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+                        <circle cx="9.5" cy="9.5" r="1.5" />
+                        <path d="M13.5 12.5l1.1 2.1 2.3.3-1.7 1.7.4 2.3-2.1-1.1-2.1 1.1.4-2.3-1.7-1.7 2.3-.3z" />
                     </svg>
                     </span>
                     <span class="nav-label">Brand Name</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page12.html" class="nav-link" data-page="page12.html" title="E-E-A-T">
+                <a href="page13.html" class="nav-link" data-page="page13.html" title="E-E-A-T">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 3l8 3v6c0 5.4-3.8 9.6-8 11-4.2-1.4-8-5.6-8-11V6l8-3z" />
-                        <path d="M9.5 11.5h5" />
-                        <path d="M12 9v5.5" />
+                        <path d="M12 3 5 6v6c0 5 3.5 8.5 7 9 3.5-.5 7-4 7-9V6z" />
+                        <path d="M12 10.5l1 2 2.2.3-1.6 1.6.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.6 2.2-.3z" />
                     </svg>
                     </span>
                     <span class="nav-label">E-E-A-T</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page13.html" class="nav-link" data-page="page13.html" title="Optimizing for AI">
+                <a href="page14.html" class="nav-link" data-page="page14.html" title="Optimizing for AI">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="12" r="3" />
-                        <circle cx="5" cy="7" r="2.2" />
-                        <circle cx="19" cy="7" r="2.2" />
-                        <circle cx="7" cy="19" r="2.2" />
-                        <circle cx="18" cy="18" r="2.2" />
-                        <path d="M7 17.2l3-3.2" />
-                        <path d="M17.2 16l-2.7-2.2" />
-                        <path d="M7.2 9.2l2.6 1.6" />
-                        <path d="M16.8 9.2l-2.6 1.6" />
-                        <path d="M7 7l5-2" />
-                        <path d="M17 7l-5-2" />
+                        <path d="M9.5 4.5a3.5 3.5 0 0 0-3.5 3.5v7a3.5 3.5 0 0 0 3.5 3.5H11V4.5z" />
+                        <path d="M14.5 4.5H13v14h1.5a3.5 3.5 0 0 0 3.5-3.5v-7a3.5 3.5 0 0 0-3.5-3.5z" />
+                        <path d="M9 9h2" />
+                        <path d="M13 9h2" />
+                        <path d="M9 12h2.5" />
+                        <path d="M13 12h3" />
+                        <path d="M9 15h2" />
+                        <path d="M13 15h2.5" />
                     </svg>
                     </span>
                     <span class="nav-label">Optimizing for AI</span>
@@ -367,7 +388,7 @@
             </li>
             <li class="nav-divider" aria-hidden="true"></li>
             <li class="nav-item">
-                <a href="page14.html" class="nav-link" data-page="page14.html" title="Client Action Items">
+                <a href="page15.html" class="nav-link" data-page="page15.html" title="Client Action Items">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M5 6h9" />
@@ -381,7 +402,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page15.html" class="nav-link" data-page="page15.html" title="Action Items">
+                <a href="page16.html" class="nav-link" data-page="page16.html" title="LHD Action Items">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M6 5.5A2.5 2.5 0 0 1 8.5 3H20v15h-11.5A2.5 2.5 0 0 0 6 20.5z" />
@@ -390,11 +411,11 @@
                         <path d="M9 11h7" />
                     </svg>
                     </span>
-                    <span class="nav-label">Action Items</span>
+                    <span class="nav-label">LHD Action Items</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page16.html" class="nav-link" data-page="page16.html" title="Client Feedback">
+                <a href="page17.html" class="nav-link" data-page="page17.html" title="Client Feedback">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M19 15a3 3 0 0 1-3 3H9l-4 4v-4H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3z" />
@@ -407,7 +428,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page17.html" class="nav-link" data-page="page17.html" title="CU Deployment">
+                <a href="page18.html" class="nav-link" data-page="page18.html" title="CU Deployment">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M5 11l7-7 7 7" />
@@ -439,147 +460,49 @@
     <div class="main-content">
         <div class="container">
             <div class="header">
-                <h1>Client Goals</h1>
+                <h1>CU Deployment</h1>
                 <div class="divider"></div>
+                <p style="font-size: 18px; color: #667085; max-width: 700px; margin: 0 auto; line-height: 1.7;">
+                    A centralized view of active deployment tasks sourced from ClickUp to keep the implementation team aligned and on schedule.
+                </p>
             </div>
 
-            <form id="goalsForm">
-                <div class="question-block">
-                    <div class="question">
-                        1. If everything was perfect in your business & life, what would success look like for your firm over the next 6 to 12 months?
-                    </div>
-                    <textarea class="answer-field" id="question1" placeholder="Enter your answer here..." onblur="autoSaveGoals()"></textarea>
-                </div>
-
-                <div class="question-block">
-                    <div class="question">
-                        2. How many new cases do you sign up on average each month now?
-                    </div>
-                    <textarea class="answer-field" id="question2" placeholder="Enter your answer here..." onblur="autoSaveGoals()"></textarea>
-                </div>
-
-                <div class="question-block">
-                    <div class="question">
-                        3. How many new cases do you want to sign up monthly (if marketing was 10/10)?
-                    </div>
-                    <textarea class="answer-field" id="question3" placeholder="Enter your answer here..." onblur="autoSaveGoals()"></textarea>
-                </div>
-
-                
-                <div class="save-notification" id="saveNotification">
-                    ✓ Responses saved successfully!
-                </div>
-            </form>
-        
-            <!-- Issues/Concerns Section -->
-            <div style="margin-top: 50px;">
-                <h2 style="font-size: 28px; color: #2B4C7E; font-weight: 700; margin-bottom: 15px;">Issues/Concerns</h2>
-                <textarea 
-                    id="issues-concerns-page2" onblur="autoSavePage2()" 
-                    placeholder="Enter any issues or concerns here..."
-                    style="width: 100%; min-height: 120px; padding: 15px; font-size: 16px; font-family: Arial, sans-serif; border: 2px solid #c3cfe2; border-radius: 10px; resize: vertical;"
-                ></textarea>
+            <div class="section">
+                <h2>Deployment Workflow Overview</h2>
+                <p>
+                    Use this page to capture high-priority tickets, status updates, and blockers. Sync with the ClickUp board at the start and end of each workday
+                    to ensure the CRM, analytics, content, and engineering teams have an accurate snapshot of progress.
+                </p>
             </div>
 
-            <!-- Action Items Section -->
-            <div style="margin-top: 30px;">
-                <h2 style="font-size: 28px; color: #2B4C7E; font-weight: 700; margin-bottom: 15px;">Action Items</h2>
-                <textarea 
-                    id="action-items-page2" onblur="autoSavePage2()" 
-                    placeholder="Enter action items here..."
-                    style="width: 100%; min-height: 120px; padding: 15px; font-size: 16px; font-family: Arial, sans-serif; border: 2px solid #c3cfe2; border-radius: 10px; resize: vertical;"
-                ></textarea>
+            <div class="section">
+                <div class="task-card">
+                    <h3>🐞 QA & Bug Fixes</h3>
+                    <ul>
+                        <li>Validate latest production deployment against regression checklist.</li>
+                        <li>Document reproduction steps, screenshots, and environment details.</li>
+                        <li>Assign ownership and due dates directly within ClickUp.</li>
+                    </ul>
+                </div>
+                <div class="task-card">
+                    <h3>🚀 Feature Rollouts</h3>
+                    <ul>
+                        <li>Confirm acceptance criteria with the product owner before merging.</li>
+                        <li>Update relevant SOPs and training videos after launch.</li>
+                        <li>Schedule post-deployment monitoring windows for critical releases.</li>
+                    </ul>
+                </div>
+                <div class="task-card">
+                    <h3>📊 Reporting & Visibility</h3>
+                    <ul>
+                        <li>Review ClickUp dashboards for overdue tasks and sprint velocity.</li>
+                        <li>Share weekly deployment summaries with stakeholders.</li>
+                        <li>Archive completed tasks and link retrospectives for future reference.</li>
+                    </ul>
+                </div>
             </div>
-
-            
-            
-</div>
+        </div>
     </div>
-
-    <script>
-        // Load saved responses on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            const savedData = localStorage.getItem('clientGoals');
-            if (savedData) {
-                const data = JSON.parse(savedData);
-                document.getElementById('question1').value = data.question1 || '';
-                document.getElementById('question2').value = data.question2 || '';
-                document.getElementById('question3').value = data.question3 || '';
-            }
-        });
-
-        // Auto-save function for goals
-        function autoSaveGoals() {
-            const data = {
-                question1: document.getElementById('question1').value,
-                question2: document.getElementById('question2').value,
-                question3: document.getElementById('question3').value
-            };
-
-            localStorage.setItem('clientGoals', JSON.stringify(data));
-        }
-
-        // Save responses
-        document.getElementById('goalsForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const data = {
-                question1: document.getElementById('question1').value,
-                question2: document.getElementById('question2').value,
-                question3: document.getElementById('question3').value
-            };
-
-            localStorage.setItem('clientGoals', JSON.stringify(data));
-            
-            // Show notification
-            const notification = document.getElementById('saveNotification');
-            notification.classList.add('show');
-            setTimeout(function() {
-                notification.classList.remove('show');
-            }, 3000);
-        });
-    
-        // Load saved notes on page load for PAGE2
-        window.addEventListener('DOMContentLoaded', function() {
-            const savedNotes = localStorage.getItem('page2Notes');
-            if (savedNotes) {
-                const notes = JSON.parse(savedNotes);
-                if (notes.issues) {
-                    document.getElementById('issues-concerns-page2').value = notes.issues;
-                }
-                if (notes.actions) {
-                    document.getElementById('action-items-page2').value = notes.actions;
-                }
-            }
-        });
-
-        function autoSavePage2() {
-            const notes = {
-                issues: document.getElementById('issues-concerns-page2').value,
-                actions: document.getElementById('action-items-page2').value
-            };
-            
-            localStorage.setItem('page2Notes', JSON.stringify(notes));
-        }
-    
-
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const current = (window.location.pathname.split('/').pop() || 'page1.html').toLowerCase();
-            document.querySelectorAll('.nav-link[data-page]').forEach(link => {
-                if ((link.dataset.page || '').toLowerCase() === current) {
-                    link.classList.add('active');
-                    link.setAttribute('aria-current', 'page');
-                }
-            });
-        });
-    </script>
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" referrerpolicy="no-referrer"></script>
-    <script src="pdf-export.js"></script>
 </body>
 </html>
+

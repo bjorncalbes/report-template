@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page 9 - Content (Topical Authority) | Hurwitz Law Group</title>
     <style>
-        :root {
-            --sidebar-width: 240px;
-            --accent-color: #0445ac;
-            --text-primary: #0b1e3d;
-            --text-secondary: rgba(11, 30, 61, 0.72);
-            --surface-color: rgba(244, 246, 250, 0.82);
-            --surface-hover: rgba(4, 69, 172, 0.12);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -21,11 +12,18 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
-            background: linear-gradient(180deg, #f5f5f7 0%, #e9ecf2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             display: flex;
-            color: var(--text-primary);
+        }
+        nav.sidebar {
+            --sidebar-width: 240px;
+            --accent-color: #0445ac;
+            --text-primary: #0b1e3d;
+            --text-secondary: rgba(11, 30, 61, 0.72);
+            --surface-color: rgba(244, 246, 250, 0.82);
+            --surface-hover: rgba(4, 69, 172, 0.12);
         }
 
         .sidebar {
@@ -48,7 +46,6 @@
             scrollbar-width: none;
             backdrop-filter: blur(26px);
         }
-
 
         .sidebar-header {
             text-align: center;
@@ -101,8 +98,8 @@
 
         .nav-link.active {
             color: var(--accent-color);
-            background: rgba(0, 113, 227, 0.16);
-            box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.35);
+            background: rgba(10, 132, 255, 0.16);
+            box-shadow: inset 0 0 0 1px rgba(10, 132, 255, 0.32);
             transform: translateX(6px);
         }
 
@@ -167,10 +164,10 @@
 
         .main-content {
             margin-left: var(--sidebar-width);
-            padding: 48px;
+            padding: 40px;
+            overflow-y: auto;
         }
 
-    
         .sidebar::-webkit-scrollbar {
             width: 0;
             height: 0;
@@ -180,10 +177,346 @@
             background: transparent;
         }
 
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            padding: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #2B4C7E;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: #2B4C7E;
+            margin: 30px auto;
+            border-radius: 2px;
+        }
+
+        .section {
+            margin: 50px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #2B4C7E;
+            font-weight: 900;
+            margin-bottom: 25px;
+            border-left: 5px solid #2B4C7E;
+            padding-left: 20px;
+        }
+
+        .why-important {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .why-important h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .why-important p {
+            font-size: 17px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, #2B4C7E 0%, #1e3a5f 100%);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f5f7fa;
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight-green {
+            background: #e8f5e9;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .data-table th.text-center {
+            text-align: center;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .data-table td.text-center {
+            text-align: center;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .diagram-container {
+            background: #f5f7fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .diagram-box {
+            background: white;
+            border: 3px solid #2B4C7E;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            display: inline-block;
+            min-width: 200px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-box.primary {
+            background: linear-gradient(135deg, #2B4C7E 0%, #1e3a5f 100%);
+            color: white;
+            font-weight: 900;
+            font-size: 20px;
+        }
+
+        .diagram-box.secondary {
+            background: #e3f2fd;
+            border-color: #1976d2;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .arrow-down {
+            font-size: 40px;
+            color: #2B4C7E;
+            margin: 20px 0;
+        }
+
+        .arrow-right {
+            font-size: 40px;
+            color: #2B4C7E;
+            margin: 0 20px;
+            display: inline-block;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .strategy-card {
+            background: white;
+            border: 2px solid #2B4C7E;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .strategy-card h4 {
+            color: #2B4C7E;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .interactive-example {
+            background: #f5f7fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .interactive-example h4 {
+            font-size: 24px;
+            color: #2B4C7E;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .interactive-example p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .interactive-mockup {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 40px;
+            color: white;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .interactive-mockup h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .interactive-mockup button {
+            background: white;
+            color: #1a1a1a;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .text-area {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            border: 2px solid #c3cfe2;
+            border-radius: 10px;
+            resize: vertical;
+            margin-top: 10px;
+        }
+
+        .text-area:focus {
+            outline: none;
+            border-color: #2B4C7E;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #2B4C7E;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+        }
+
+        .trending-list {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .trending-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .trending-item:last-child {
+            border-bottom: none;
+        }
+
+        .trending-title {
+            font-weight: 600;
+            color: #2B4C7E;
+            font-size: 16px;
+            flex: 1;
+        }
+
+        .trending-stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .trending-arrow {
+            color: #4caf50;
+            font-weight: 700;
+        }
+
+        .trending-clicks {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .action-btn {
+            background: #2B4C7E;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #1e3a5f;
+        }
+
+        .delete-btn {
+            background: #d32f2f;
+        }
+
+        .delete-btn:hover {
+            background: #b71c1c;
+        }
+
+        [contenteditable="true"]:focus {
+            outline: 2px solid #2B4C7E;
+            background: #f0f7ff;
+        }
+
+        [contenteditable="true"] {
+            min-height: 20px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
-        <nav class="sidebar">
+    <nav class="sidebar">
         <div class="sidebar-header">
             <img src="https://lionheadmarketing.com/wp-content/uploads/2023/05/cropped-LHD_Favicon-1-192x192.png" alt="Lion Head Digital" class="sidebar-logo">
         </div>
@@ -202,7 +535,21 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page2.html" class="nav-link" data-page="page2.html" title="Client Goals">
+                <a href="page2.html" class="nav-link" data-page="page2.html" title="Executive Summary">
+                    <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="5" y="3" width="14" height="18" rx="2" />
+                        <path d="M9 7h6" />
+                        <path d="M8 11h8" />
+                        <path d="M8 14l2.2-2.2 1.8 1.4 3-3" />
+                        <path d="M8 18h8" />
+                    </svg>
+                    </span>
+                    <span class="nav-label">Executive Summary</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="page3.html" class="nav-link" data-page="page3.html" title="Client Goals">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <circle cx="12" cy="12" r="8" />
@@ -217,7 +564,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page3.html" class="nav-link" data-page="page3.html" title="Wins">
+                <a href="page4.html" class="nav-link" data-page="page4.html" title="Wins">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M9 6h6" />
@@ -233,7 +580,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page4.html" class="nav-link" data-page="page4.html" title="Leads & Conversion">
+                <a href="page5.html" class="nav-link" data-page="page5.html" title="Leads & Conversion">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M5 16l3.5-3.5 3 3L19 8" />
@@ -245,7 +592,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page5.html" class="nav-link" data-page="page5.html" title="Issues & Challenges">
+                <a href="page6.html" class="nav-link" data-page="page6.html" title="Issues & Challenges">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12 5l7 12H5z" />
@@ -257,13 +604,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page6.html" class="nav-link" data-page="page6.html" title="Competition">
+                <a href="page7.html" class="nav-link" data-page="page7.html" title="Competition">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="9.5" cy="9.5" r="4.5" />
-                        <circle cx="17" cy="17" r="3" />
-                        <path d="M12.5 12.5l2.5 2.5" />
-                        <path d="M6.5 12h4" />
+                        <path d="M7 4h10v3a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4z" />
+                        <path d="M12 11v3" />
+                        <path d="M10 17h4" />
+                        <path d="M9 20h6" />
+                        <path d="M7 7H5a2 2 0 0 0 2 2" />
+                        <path d="M17 7h2a2 2 0 0 1-2 2" />
                     </svg>
                     </span>
                     <span class="nav-label">Competition</span>
@@ -271,20 +620,21 @@
             </li>
             <li class="nav-divider" aria-hidden="true"></li>
             <li class="nav-item">
-                <a href="page7.html" class="nav-link" data-page="page7.html" title="HLS Overview">
+                <a href="page8.html" class="nav-link" data-page="page8.html" title="HLS Overview">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M9 5V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V5" />
-                        <rect x="7" y="5" width="10" height="14" rx="2" />
-                        <path d="M10 10h6" />
-                        <path d="M10 14h6" />
+                        <rect x="3" y="4" width="18" height="16" rx="2" />
+                        <path d="M3 10h18" />
+                        <path d="M9 10v10" />
+                        <path d="M15 10v10" />
+                        <path d="M9 14h3" />
                     </svg>
                     </span>
                     <span class="nav-label">HLS Overview</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page8.html" class="nav-link" data-page="page8.html" title="GBP Reviews">
+                <a href="page9.html" class="nav-link" data-page="page9.html" title="GBP Reviews">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12 21c-3.7-3.5-5.5-6.2-5.5-9.3a5.5 5.5 0 1 1 11 0c0 3.1-1.8 5.8-5.5 9.3z" />
@@ -295,7 +645,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page9.html" class="nav-link" data-page="page9.html" title="Content">
+                <a href="page10.html" class="nav-link" data-page="page10.html" title="Content">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M8 4h6l4 4v10a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" />
@@ -308,7 +658,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page10.html" class="nav-link" data-page="page10.html" title="Backlinks">
+                <a href="page11.html" class="nav-link" data-page="page11.html" title="Backlinks">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M9.5 14.5l-2 2a3.5 3.5 0 1 1-5-5l3-3" />
@@ -320,46 +670,40 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page11.html" class="nav-link" data-page="page11.html" title="Brand Name">
+                <a href="page12.html" class="nav-link" data-page="page12.html" title="Brand Name">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <rect x="3" y="4" width="18" height="12" rx="3" />
-                        <path d="M12 16v3.5" />
-                        <path d="M8 20h8" />
-                        <circle cx="15" cy="9" r="2.5" />
-                        <path d="M16.8 10.8l2.2 2.2" />
+                        <path d="M7 5h6l6 6-6 6H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+                        <circle cx="9.5" cy="9.5" r="1.5" />
+                        <path d="M13.5 12.5l1.1 2.1 2.3.3-1.7 1.7.4 2.3-2.1-1.1-2.1 1.1.4-2.3-1.7-1.7 2.3-.3z" />
                     </svg>
                     </span>
                     <span class="nav-label">Brand Name</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page12.html" class="nav-link" data-page="page12.html" title="E-E-A-T">
+                <a href="page13.html" class="nav-link" data-page="page13.html" title="E-E-A-T">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 3l8 3v6c0 5.4-3.8 9.6-8 11-4.2-1.4-8-5.6-8-11V6l8-3z" />
-                        <path d="M9.5 11.5h5" />
-                        <path d="M12 9v5.5" />
+                        <path d="M12 3 5 6v6c0 5 3.5 8.5 7 9 3.5-.5 7-4 7-9V6z" />
+                        <path d="M12 10.5l1 2 2.2.3-1.6 1.6.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.6 2.2-.3z" />
                     </svg>
                     </span>
                     <span class="nav-label">E-E-A-T</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page13.html" class="nav-link" data-page="page13.html" title="Optimizing for AI">
+                <a href="page14.html" class="nav-link" data-page="page14.html" title="Optimizing for AI">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="12" r="3" />
-                        <circle cx="5" cy="7" r="2.2" />
-                        <circle cx="19" cy="7" r="2.2" />
-                        <circle cx="7" cy="19" r="2.2" />
-                        <circle cx="18" cy="18" r="2.2" />
-                        <path d="M7 17.2l3-3.2" />
-                        <path d="M17.2 16l-2.7-2.2" />
-                        <path d="M7.2 9.2l2.6 1.6" />
-                        <path d="M16.8 9.2l-2.6 1.6" />
-                        <path d="M7 7l5-2" />
-                        <path d="M17 7l-5-2" />
+                        <path d="M9.5 4.5a3.5 3.5 0 0 0-3.5 3.5v7a3.5 3.5 0 0 0 3.5 3.5H11V4.5z" />
+                        <path d="M14.5 4.5H13v14h1.5a3.5 3.5 0 0 0 3.5-3.5v-7a3.5 3.5 0 0 0-3.5-3.5z" />
+                        <path d="M9 9h2" />
+                        <path d="M13 9h2" />
+                        <path d="M9 12h2.5" />
+                        <path d="M13 12h3" />
+                        <path d="M9 15h2" />
+                        <path d="M13 15h2.5" />
                     </svg>
                     </span>
                     <span class="nav-label">Optimizing for AI</span>
@@ -367,7 +711,7 @@
             </li>
             <li class="nav-divider" aria-hidden="true"></li>
             <li class="nav-item">
-                <a href="page14.html" class="nav-link" data-page="page14.html" title="Client Action Items">
+                <a href="page15.html" class="nav-link" data-page="page15.html" title="Client Action Items">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M5 6h9" />
@@ -381,7 +725,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page15.html" class="nav-link" data-page="page15.html" title="Action Items">
+                <a href="page16.html" class="nav-link" data-page="page16.html" title="LHD Action Items">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M6 5.5A2.5 2.5 0 0 1 8.5 3H20v15h-11.5A2.5 2.5 0 0 0 6 20.5z" />
@@ -390,11 +734,11 @@
                         <path d="M9 11h7" />
                     </svg>
                     </span>
-                    <span class="nav-label">Action Items</span>
+                    <span class="nav-label">LHD Action Items</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page16.html" class="nav-link" data-page="page16.html" title="Client Feedback">
+                <a href="page17.html" class="nav-link" data-page="page17.html" title="Client Feedback">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M19 15a3 3 0 0 1-3 3H9l-4 4v-4H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3z" />
@@ -407,7 +751,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="page17.html" class="nav-link" data-page="page17.html" title="CU Deployment">
+                <a href="page18.html" class="nav-link" data-page="page18.html" title="CU Deployment">
                     <span class="nav-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M5 11l7-7 7 7" />
@@ -435,6 +779,7 @@
             </a>
         </div>
     </nav>
+
     <div class="main-content">
         <div class="container">
             <div class="header">
@@ -454,7 +799,7 @@
                 </div>
 
                 <!-- Location by Priority Table -->
-                <h3 style="font-size: 24px; color: #2B4C7E; margin: 50px 0 20px 0; font-weight: 700;">Location by Priority</h3>
+                <h3 style="font-size: 24px; color: #2B4C7E; margin: 30px 0 20px 0; font-weight: 700;">Location by Priority</h3>
                 <div style="border: 2px solid #e0e7ff; border-radius: 10px; overflow: hidden;">
                     <table class="data-table draggable-table" id="locationTable" style="margin: 0; border: none;">
                         <thead>
@@ -596,76 +941,77 @@
                 </div>
 
                 <!-- Practice Area by Priority Table -->
-                <h3 style="font-size: 24px; color: #2B4C7E; margin: 60px 0 20px 0; font-weight: 700;">Case Types/Practice Area by Priority</h3>
-                <div style="border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
-                    <table class="data-table" id="caseTypeTable" style="margin: 0; border-radius: 10px 10px 0 0;">
-                        <thead>
-                            <tr>
-                                <th style="width: 40px;">Drag</th>
-                                <th>Case Types</th>
-                                <th class="text-center">Pages</th>
-                                <th class="text-center" style="width: 60px;">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody id="caseTypeTableBody">
-                            <tr draggable="true" class="draggable-row">
-                                <td class="drag-handle" style="cursor: grab; text-align: center; user-select: none;">⋮⋮</td>
-                                <td contenteditable="true"><strong>DUI</strong></td>
-                                <td contenteditable="true" class="text-center">68</td>
-                                <td class="text-center">
-                                    <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
-                                </td>
-                            </tr>
-                            <tr draggable="true" class="draggable-row">
-                                <td class="drag-handle" style="cursor: grab; text-align: center; user-select: none;">⋮⋮</td>
-                                <td contenteditable="true"><strong>Criminal Defense</strong></td>
-                                <td contenteditable="true" class="text-center">37</td>
-                                <td class="text-center">
-                                    <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
-                                </td>
-                            </tr>
-                            <tr draggable="true" class="draggable-row">
-                                <td class="drag-handle" style="cursor: grab; text-align: center; user-select: none;">⋮⋮</td>
-                                <td contenteditable="true"><strong>Domestic Violence</strong></td>
-                                <td contenteditable="true" class="text-center">29</td>
-                                <td class="text-center">
-                                    <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
-                                </td>
-                            </tr>
-                            <tr draggable="true" class="draggable-row">
-                                <td class="drag-handle" style="cursor: grab; text-align: center; user-select: none;">⋮⋮</td>
-                                <td contenteditable="true"><strong>Restraining Orders</strong></td>
-                                <td contenteditable="true" class="text-center">17</td>
-                                <td class="text-center">
-                                    <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
-                                </td>
-                            </tr>
-                            <tr draggable="true" class="draggable-row">
-                                <td class="drag-handle" style="cursor: grab; text-align: center; user-select: none;">⋮⋮</td>
-                                <td contenteditable="true"><strong>Child Custody</strong></td>
-                                <td contenteditable="true" class="text-center">6</td>
-                                <td class="text-center">
-                                    <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
-                                </td>
-                            </tr>
-                            <tr draggable="true" class="draggable-row">
-                                <td class="drag-handle" style="cursor: grab; text-align: center; user-select: none;">⋮⋮</td>
-                                <td contenteditable="true"><strong>Gun Cases</strong></td>
-                                <td contenteditable="true" class="text-center">1</td>
-                                <td class="text-center">
-                                    <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div style="background: #f5f7fa; border-top: 2px solid #e0e7ff; padding: 15px; text-align: center;">
-                        <button onclick="addCaseTypeRow()" style="background: #2B4C7E; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: 600;">+ Add Row</button>
-                    </div>
-                </div>
+                <h3 style="font-size: 24px; color: #2B4C7E; margin: 40px 0 20px 0; font-weight: 700;">Case Types/Practice Area by Priority</h3>
+                <button onclick="addCaseTypeRow()" style="background: #2B4C7E; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 15px; font-size: 14px;">+ Add Row</button>
+                <table class="data-table" id="caseTypeTable">
+                    <thead>
+                        <tr>
+                            <th>Case Types</th>
+                            <th class="text-center">Pages</th>
+                            <th class="text-center" style="width: 120px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="caseTypeTableBody">
+                        <tr>
+                            <td contenteditable="true"><strong>DUI</strong></td>
+                            <td contenteditable="true" class="text-center">68</td>
+                            <td class="text-center">
+                                <button onclick="moveRowUp(this)" class="action-btn" title="Move Up">↑</button>
+                                <button onclick="moveRowDown(this)" class="action-btn" title="Move Down">↓</button>
+                                <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td contenteditable="true"><strong>Criminal Defense</strong></td>
+                            <td contenteditable="true" class="text-center">37</td>
+                            <td class="text-center">
+                                <button onclick="moveRowUp(this)" class="action-btn" title="Move Up">↑</button>
+                                <button onclick="moveRowDown(this)" class="action-btn" title="Move Down">↓</button>
+                                <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td contenteditable="true"><strong>Domestic Violence</strong></td>
+                            <td contenteditable="true" class="text-center">29</td>
+                            <td class="text-center">
+                                <button onclick="moveRowUp(this)" class="action-btn" title="Move Up">↑</button>
+                                <button onclick="moveRowDown(this)" class="action-btn" title="Move Down">↓</button>
+                                <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td contenteditable="true"><strong>Restraining Orders</strong></td>
+                            <td contenteditable="true" class="text-center">17</td>
+                            <td class="text-center">
+                                <button onclick="moveRowUp(this)" class="action-btn" title="Move Up">↑</button>
+                                <button onclick="moveRowDown(this)" class="action-btn" title="Move Down">↓</button>
+                                <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td contenteditable="true"><strong>Child Custody</strong></td>
+                            <td contenteditable="true" class="text-center">6</td>
+                            <td class="text-center">
+                                <button onclick="moveRowUp(this)" class="action-btn" title="Move Up">↑</button>
+                                <button onclick="moveRowDown(this)" class="action-btn" title="Move Down">↓</button>
+                                <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td contenteditable="true"><strong>Gun Cases</strong></td>
+                            <td contenteditable="true" class="text-center">1</td>
+                            <td class="text-center">
+                                <button onclick="moveRowUp(this)" class="action-btn" title="Move Up">↑</button>
+                                <button onclick="moveRowDown(this)" class="action-btn" title="Move Down">↓</button>
+                                <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <!-- Content Gap Table -->
-                <h3 style="font-size: 24px; color: #2B4C7E; margin: 80px 0 0 0; font-weight: 700;">Content Gap</h3>
-                <div style="overflow-x: auto; margin-top: 0;">
+                <h3 style="font-size: 24px; color: #2B4C7E; margin: 40px 0 20px 0; font-weight: 700;">Content Gap</h3>
+                <div style="overflow-x: auto;">
                     <table class="data-table" style="font-size: 13px;">
                         <thead>
                             <tr>
@@ -678,157 +1024,157 @@
                             <tr>
                                 <td><strong>DUI / Drunk Driving</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">dui-information.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">vehicular-manslaughter-defense-attorney</a>, <a href="#" style="color: #1976d2; text-decoration: none;">chemical-test-choices</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-dui-lawyer/ + subpages</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-dui-lawyer/ + subpages</td>
                             </tr>
                             <tr>
                                 <td><strong>Domestic Violence</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">domestic-violence.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">domestic-battery.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">is-domestic-violence-a-misdemeanor</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-domestic-violence-attorney/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-domestic-violence-attorney/</td>
                             </tr>
                             <tr>
                                 <td><strong>Drug Crimes / Possession / Sales</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">drug-crimes-information.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">drug-diversion.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-drug-crime-attorney/ + blogs</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-drug-crime-attorney/ + blogs</td>
                             </tr>
                             <tr>
                                 <td><strong>Theft / Shoplifting / Burglary / Robbery</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">petty-theft.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">shoplifting.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">burglary.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">robbery.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-theft-crime-attorney/ + subpages</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-theft-crime-attorney/ + subpages</td>
                             </tr>
                             <tr>
                                 <td><strong>Probation Violation</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">probation-violation.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-probation-violation-attorney/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-probation-violation-attorney/</td>
                             </tr>
                             <tr>
                                 <td><strong>Expungement / Record Sealing</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">expungement.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">certificates-of-rehabilitation</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-expungement-attorney/ + blogs</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-expungement-attorney/ + blogs</td>
                             </tr>
                             <tr>
                                 <td><strong>Restraining Orders</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">california-restraining-order-law</a>, <a href="#" style="color: #1976d2; text-decoration: none;">violating-a-restraining-order</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-restraining-order-attorney/ + blogs</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-restraining-order-attorney/ + blogs</td>
                             </tr>
                             <tr>
                                 <td><strong>Assault / Battery</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">aggravated-assault.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">battery.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">assault.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-assault-lawyer/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-assault-lawyer/</td>
                             </tr>
                             <tr>
                                 <td><strong>Sex Crimes / Sexual Assault / Child Pornography</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">statutory-rape.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">child-pornography.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">sexual-battery</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-sex-crimes-lawyer/ + subpages</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-sex-crimes-lawyer/ + subpages</td>
                             </tr>
                             <tr>
                                 <td><strong>Homicide / Manslaughter / Murder</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">homicide-manslaughter.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">involuntary-manslaughter</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-homicide-attorney/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-homicide-attorney/</td>
                             </tr>
                             <tr>
                                 <td><strong>Child Endangerment / Abuse</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">child-endangerment.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">child-abuse.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-child-endangerment-lawyer/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-child-endangerment-lawyer/</td>
                             </tr>
                             <tr>
                                 <td><strong>Gun Crimes / Weapons Charges</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">felon-firearm.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">assaulting-officer.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-gun-crime-lawyer/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-gun-crime-lawyer/</td>
                             </tr>
                             <tr>
                                 <td><strong>White Collar / Fraud / Embezzlement</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">whitecollar-crime.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">bank-fraud.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">embezzlement.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-federal-crimes-attorney/ (partial)</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-federal-crimes-attorney/ (partial)</td>
                             </tr>
                             <tr>
                                 <td><strong>Federal Crimes</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">federal-crimes-2</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-federal-crimes-attorney/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-federal-crimes-attorney/</td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Juvenile Defense</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">juvenile-defense.html</a></td>
-                                <td><span style="color: #f44336;">✗</span> None</td>
+                                <td><span style="color: #f44336;">âœ—</span> None</td>
                             </tr>
                             <tr>
                                 <td><strong>Elder Abuse</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">elder-abuse.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-elder-abuse-lawyer/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-elder-abuse-lawyer/</td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Arson / Property Damage / Vandalism</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">arson.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">vandalism.html</a></td>
-                                <td><span style="color: #f44336;">✗</span> None</td>
+                                <td><span style="color: #f44336;">âœ—</span> None</td>
                             </tr>
                             <tr>
                                 <td><strong>Human Trafficking / Pimping / Prostitution</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">pimping</a>, <a href="#" style="color: #1976d2; text-decoration: none;">human-trafficking</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /los-angeles-prostitution-lawyer/ (partial)</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /los-angeles-prostitution-lawyer/ (partial)</td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Sex Offender Registration</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">failing-to-register-as-a-sex-offender</a></td>
-                                <td><span style="color: #f44336;">✗</span> None</td>
+                                <td><span style="color: #f44336;">âœ—</span> None</td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Trespassing / Disturbing the Peace</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">trespassing.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">disturbing-peace.html</a></td>
-                                <td><span style="color: #f44336;">✗</span> None</td>
+                                <td><span style="color: #f44336;">âœ—</span> None</td>
                             </tr>
                             <tr>
                                 <td><strong>Public Intoxication / Reckless Endangerment</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">public-intoxication.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">reckless-endangerment.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> Partial overlap</td>
+                                <td><span style="color: #4caf50;">âœ“</span> Partial overlap</td>
                             </tr>
                             <tr>
                                 <td><strong>Professional Licensing Defense (Nurses / Doctors)</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">nursing-license-defense</a></td>
-                                <td><span style="color: #4caf50;">✓</span> Full match</td>
+                                <td><span style="color: #4caf50;">âœ“</span> Full match</td>
                             </tr>
                             <tr>
                                 <td><strong>Wrongful Death / Personal Injury</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">wrongful-death-lawsuits</a>, <a href="#" style="color: #1976d2; text-decoration: none;">herniamesh-lawsuits</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /beverly-hills-personal-injury-attorney/ (secondary)</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /beverly-hills-personal-injury-attorney/ (secondary)</td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Traffic Tickets / Evading Officer</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">traffic-tickets.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">evading-an-officer</a></td>
-                                <td><span style="color: #f44336;">✗</span> None</td>
+                                <td><span style="color: #f44336;">âœ—</span> None</td>
                             </tr>
                             <tr>
                                 <td><strong>Bail / Arrest Warrants / Court Process</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">bail-reduction.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">arrest-warrant.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> Partial â€” /blog/how-do-bail-bonds-work-in-california/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> Partial â€” /blog/how-do-bail-bonds-work-in-california/</td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Statutes of Limitations / Legal Procedures</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">criminal-statute-of-limitations-in-california</a></td>
-                                <td><span style="color: #f44336;">✗</span> None</td>
+                                <td><span style="color: #f44336;">âœ—</span> None</td>
                             </tr>
                             <tr>
                                 <td><strong>Three Strikes Law / Sentencing</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">three-strikes.html</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /blog/understanding-the-basics-of-the-three-strikes-law/</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /blog/understanding-the-basics-of-the-three-strikes-law/</td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Insurance / Unemployment Fraud</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">insurance-fraud.html</a>, <a href="#" style="color: #1976d2; text-decoration: none;">unemployment-insurance-fraud</a></td>
-                                <td><span style="color: #f44336;">✗</span> None</td>
+                                <td><span style="color: #f44336;">âœ—</span> None</td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Extortion / Bribery / Threats</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">extortion</a>, <a href="#" style="color: #1976d2; text-decoration: none;">bribery</a>, <a href="#" style="color: #1976d2; text-decoration: none;">terrorist-threats</a></td>
-                                <td><span style="color: #f44336;">✗</span> None</td>
+                                <td><span style="color: #f44336;">âœ—</span> None</td>
                             </tr>
                             <tr>
                                 <td><strong>Legal News / Celebrity Cases</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">actor-stephen-collins-confesses-molestation-accusations</a></td>
-                                <td><span style="color: #4caf50;">✓</span> Similar tone but fewer</td>
+                                <td><span style="color: #4caf50;">âœ“</span> Similar tone but fewer</td>
                             </tr>
                             <tr>
                                 <td><strong>Legal Guides / What to Do ifâ€¦</strong></td>
                                 <td><a href="#" style="color: #1976d2; text-decoration: none;">criminal-legal-resources</a>, <a href="#" style="color: #1976d2; text-decoration: none;">what-to-do-if-charged-with-a-dui-while-having-kids-in-the-car</a></td>
-                                <td><span style="color: #4caf50;">✓</span> /blog/how-to-find-a-good-criminal-defense-attorney/ etc.</td>
+                                <td><span style="color: #4caf50;">âœ“</span> /blog/how-to-find-a-good-criminal-defense-attorney/ etc.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -930,61 +1276,61 @@
                 </div>
 
                 <!-- Trending Content Table -->
-                <h3 style="font-size: 24px; color: #2B4C7E; margin: 80px 0 5px 0; font-weight: 700;">Top Trending Content (Trending Up)</h3>
+                <h3 style="font-size: 24px; color: #2B4C7E; margin: 40px 0 20px 0; font-weight: 700;">Top Trending Content (Trending Up)</h3>
                 <div class="trending-list">
                     <div class="trending-item">
                         <div class="trending-title">Domestic Violence: Types of Defenses</div>
                         <div class="trending-stats">
-                            <span class="trending-arrow">↑ 3,212%</span>
+                            <span class="trending-arrow">â†‘ 3,212%</span>
                             <span class="trending-clicks">+2.89K</span>
                         </div>
                     </div>
                     <div class="trending-item">
                         <div class="trending-title">How Much Does the Average Criminal Trial Cost</div>
                         <div class="trending-stats">
-                            <span class="trending-arrow">↑ 70%</span>
+                            <span class="trending-arrow">â†‘ 70%</span>
                             <span class="trending-clicks">+372</span>
                         </div>
                     </div>
                     <div class="trending-item">
                         <div class="trending-title">Will Domestic Violence Charges Show on a Background Check?</div>
                         <div class="trending-stats">
-                            <span class="trending-arrow">↑ 226%</span>
+                            <span class="trending-arrow">â†‘ 226%</span>
                             <span class="trending-clicks">+336</span>
                         </div>
                     </div>
                     <div class="trending-item">
                         <div class="trending-title">What Charges Stop You From Being a Nurse in California? Find Out Here.</div>
                         <div class="trending-stats">
-                            <span class="trending-arrow">↑ 703%</span>
+                            <span class="trending-arrow">â†‘ 703%</span>
                             <span class="trending-clicks">+225</span>
                         </div>
                     </div>
                     <div class="trending-item">
                         <div class="trending-title">What Happens to My Property if I am Incarcerated? | Hurwitz Law Group</div>
                         <div class="trending-stats">
-                            <span class="trending-arrow">↑ 28%</span>
+                            <span class="trending-arrow">â†‘ 28%</span>
                             <span class="trending-clicks">+201</span>
                         </div>
                     </div>
                     <div class="trending-item">
                         <div class="trending-title">Can You Be an RN with a DUI? | Hurwitz Law Group</div>
                         <div class="trending-stats">
-                            <span class="trending-arrow">↑ 1,059%</span>
+                            <span class="trending-arrow">â†‘ 1,059%</span>
                             <span class="trending-clicks">+180</span>
                         </div>
                     </div>
                     <div class="trending-item">
                         <div class="trending-title">How to Get a Child Endangerment Charge Dropped</div>
                         <div class="trending-stats">
-                            <span class="trending-arrow">↑ 72%</span>
+                            <span class="trending-arrow">â†‘ 72%</span>
                             <span class="trending-clicks">+137</span>
                         </div>
                     </div>
                     <div class="trending-item">
                         <div class="trending-title">Being a Nurse with Felony Convictions: What to Know Before You Apply</div>
                         <div class="trending-stats">
-                            <span class="trending-arrow">↑ 1,463%</span>
+                            <span class="trending-arrow">â†‘ 1,463%</span>
                             <span class="trending-clicks">+117</span>
                         </div>
                     </div>
@@ -1230,6 +1576,22 @@
         });
 
         // Table Row Management Functions
+        function moveRowUp(button) {
+            const row = button.closest('tr');
+            const previousRow = row.previousElementSibling;
+            if (previousRow) {
+                row.parentNode.insertBefore(row, previousRow);
+            }
+        }
+
+        function moveRowDown(button) {
+            const row = button.closest('tr');
+            const nextRow = row.nextElementSibling;
+            if (nextRow) {
+                row.parentNode.insertBefore(nextRow, row);
+            }
+        }
+
         function deleteRow(button) {
             if (confirm('Are you sure you want to delete this row?')) {
                 const row = button.closest('tr');
@@ -1240,138 +1602,42 @@
         function addLocationRow() {
             const tbody = document.getElementById('locationTableBody');
             const newRow = document.createElement('tr');
-            newRow.draggable = true;
-            newRow.className = 'draggable-row';
             newRow.innerHTML = `
-                <td class="drag-handle" style="cursor: grab; text-align: center; user-select: none;">⋮⋮</td>
                 <td contenteditable="true"><strong>New Location</strong></td>
                 <td contenteditable="true">Type</td>
                 <td contenteditable="true">0</td>
                 <td contenteditable="true" class="text-center">0</td>
                 <td class="text-center">
+                    <button onclick="moveRowUp(this)" class="action-btn" title="Move Up">↑</button>
+                    <button onclick="moveRowDown(this)" class="action-btn" title="Move Down">↓</button>
                     <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
                 </td>
             `;
             tbody.appendChild(newRow);
-            initializeDragAndDrop();
-            // Focus on the location cell of the new row
-            newRow.querySelectorAll('td')[1].focus();
+            // Focus on the first cell of the new row
+            newRow.querySelector('td').focus();
         }
 
         function addCaseTypeRow() {
             const tbody = document.getElementById('caseTypeTableBody');
             const newRow = document.createElement('tr');
-            newRow.draggable = true;
-            newRow.className = 'draggable-row';
             newRow.innerHTML = `
-                <td class="drag-handle" style="cursor: grab; text-align: center; user-select: none;">⋮⋮</td>
                 <td contenteditable="true"><strong>New Case Type</strong></td>
                 <td contenteditable="true" class="text-center">0</td>
                 <td class="text-center">
+                    <button onclick="moveRowUp(this)" class="action-btn" title="Move Up">↑</button>
+                    <button onclick="moveRowDown(this)" class="action-btn" title="Move Down">↓</button>
                     <button onclick="deleteRow(this)" class="action-btn delete-btn" title="Delete">×</button>
                 </td>
             `;
             tbody.appendChild(newRow);
-            initializeDragAndDrop();
-            // Focus on the case type cell of the new row
-            newRow.querySelectorAll('td')[1].focus();
+            // Focus on the first cell of the new row
+            newRow.querySelector('td').focus();
         }
-
-        // Drag and Drop Functionality
-        let draggedRow = null;
-
-        function initializeDragAndDrop() {
-            const draggableRows = document.querySelectorAll('.draggable-row');
-            
-            draggableRows.forEach(row => {
-                // Remove existing event listeners to prevent duplicates
-                row.removeEventListener('dragstart', handleDragStart);
-                row.removeEventListener('dragover', handleDragOver);
-                row.removeEventListener('drop', handleDrop);
-                row.removeEventListener('dragend', handleDragEnd);
-                row.removeEventListener('dragenter', handleDragEnter);
-                row.removeEventListener('dragleave', handleDragLeave);
-                
-                // Add event listeners
-                row.addEventListener('dragstart', handleDragStart);
-                row.addEventListener('dragover', handleDragOver);
-                row.addEventListener('drop', handleDrop);
-                row.addEventListener('dragend', handleDragEnd);
-                row.addEventListener('dragenter', handleDragEnter);
-                row.addEventListener('dragleave', handleDragLeave);
-            });
-        }
-
-        function handleDragStart(e) {
-            draggedRow = this;
-            this.style.opacity = '0.5';
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', this.innerHTML);
-        }
-
-        function handleDragOver(e) {
-            if (e.preventDefault) {
-                e.preventDefault();
-            }
-            e.dataTransfer.dropEffect = 'move';
-            return false;
-        }
-
-        function handleDragEnter(e) {
-            if (this !== draggedRow) {
-                this.style.borderTop = '3px solid #2B4C7E';
-            }
-        }
-
-        function handleDragLeave(e) {
-            this.style.borderTop = '';
-        }
-
-        function handleDrop(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            }
-            
-            if (draggedRow !== this) {
-                const tbody = this.parentNode;
-                const allRows = [...tbody.querySelectorAll('.draggable-row')];
-                const draggedIndex = allRows.indexOf(draggedRow);
-                const targetIndex = allRows.indexOf(this);
-                
-                if (draggedIndex < targetIndex) {
-                    tbody.insertBefore(draggedRow, this.nextSibling);
-                } else {
-                    tbody.insertBefore(draggedRow, this);
-                }
-            }
-            
-            this.style.borderTop = '';
-            return false;
-        }
-
-        function handleDragEnd(e) {
-            this.style.opacity = '1';
-            
-            document.querySelectorAll('.draggable-row').forEach(row => {
-                row.style.borderTop = '';
-            });
-        }
-
-        // Initialize drag and drop on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            initializeDragAndDrop();
-            
-            const savedNotes = localStorage.getItem('page9Notes');
-            if (savedNotes) {
-                const notes = JSON.parse(savedNotes);
-                document.getElementById('issues-concerns-page9').value = notes.issues || '';
-                document.getElementById('action-items-page9').value = notes.actions || '';
-            }
-        });
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const current = (window.location.pathname.split('/').pop() || 'page1.html').toLowerCase();
+            const current = (window.location.pathname.split('/').pop() || 'page10.html').toLowerCase();
             document.querySelectorAll('.nav-link[data-page]').forEach(link => {
                 if ((link.dataset.page || '').toLowerCase() === current) {
                     link.classList.add('active');
@@ -1380,11 +1646,5 @@
             });
         });
     </script>
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" referrerpolicy="no-referrer"></script>
-    <script src="pdf-export.js"></script>
 </body>
 </html>
