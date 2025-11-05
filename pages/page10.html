@@ -239,13 +239,87 @@
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
         }
 
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            background: rgba(255, 149, 0, 0.1);
+            color: #ff9500;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            margin-bottom: 16px;
+        }
+
+        .card .badge + .section-header {
+            margin-top: 0;
+            padding-top: 0;
+            line-height: 1.1;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(150deg, rgba(250, 252, 255, 0.94), rgba(239, 244, 252, 0.96));
+            border-radius: 22px;
+            padding: 24px;
+            border: 1px solid rgba(4, 69, 172, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 14px 28px rgba(11, 30, 61, 0.1);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: rgba(11, 30, 61, 0.58);
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            font-weight: 700;
+            font-size: clamp(30px, 3vw, 38px);
+            color: var(--text-primary);
+            letter-spacing: -0.015em;
+        }
+
+        .stat-value span {
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(11, 30, 61, 0.6);
+        }
+
+        .stat-footnote {
+            font-size: 14px;
+            color: rgba(11, 30, 61, 0.65);
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
         /* Section Header */
         .section-header {
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: -0.01em;
             color: var(--text-primary);
-            margin-bottom: 16px;
+            margin-bottom: 4px;
+            margin-top: 0;
+        }
+
+        .section-subheader {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.5;
         }
 
         /* Text Area */
@@ -849,6 +923,28 @@
             gap: 12px;
         }
 
+        .pruning-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(4, 69, 172, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px auto;
+            flex-shrink: 0;
+        }
+
+        .pruning-card-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent-color);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         .pruning-card h4 {
             font-size: 18px;
             font-weight: 700;
@@ -1261,14 +1357,24 @@
                 </div>
             </section>
 
-            <section class="content-section" id="coverage">
-                <div class="section-heading">
-                    <h2 class="section-title">Practice Area &amp; Location Coverage</h2>
-                    <p class="section-subtitle">Google rewards firms that demonstrate both topical expertise and localized relevance. Keep expanding depth where demand is highest.</p>
-                </div>
-                <div class="callout-card">
-                    <h3>Why this matters</h3>
-                    <p>Search intent is geo-specific. Cover each priority location with authoritative practice area content so Google views Hurwitz Law Group as the closest, most complete answer for every criminal defense search in Los Angeles.</p>
+            <!-- Client Action Item: Practice Area & Location Coverage -->
+            <div class="card">
+                <span class="badge">CLIENT ACTION ITEM</span>
+                <h2 class="section-header">Practice Area &amp; Location Coverage</h2>
+                <p class="section-subtitle">Google rewards firms that demonstrate both topical expertise and localized relevance. Keep expanding depth where demand is highest.</p>
+                
+                <div class="stats-grid" style="margin: 24px 0;">
+                    <div class="stat-card">
+                        <div class="stat-label">Geo Targets Live</div>
+                        <div class="stat-value">12 <span>locations</span></div>
+                        <div class="stat-footnote">City and neighborhood hubs covering the core Los Angeles footprint</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Practice Areas Published</div>
+                        <div class="stat-value">68 <span>pages</span></div>
+                        <div class="stat-footnote">Pages across the highest-volume criminal charges and defense scenarios</div>
+                    </div>
                 </div>
 
                 <article class="table-card" aria-labelledby="location-heading">
@@ -1411,7 +1517,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div style="padding: 0 28px 24px 28px;">
+                    <div style="padding: 0 28px 24px 28px; margin-bottom: 32px;">
                         <button type="button" class="btn-secondary" onclick="addLocationRow()">+ Add Location</button>
                     </div>
                 </article>
@@ -1483,7 +1589,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div style="padding: 0 28px 24px 28px;">
+                    <div style="padding: 0 28px 24px 28px; margin-bottom: 32px;">
                         <button type="button" class="btn-secondary" onclick="addCaseTypeRow()">+ Add Case Type</button>
                     </div>
                 </article>
@@ -1847,20 +1953,29 @@
                         </table>
                     </div>
                 </article>
-            </section>
+            </div>
 
-            <section class="content-section" id="interactive">
-                <div class="section-heading">
-                    <h2 class="section-title">Interactive Content</h2>
-                    <p class="section-subtitle">Interactive experiences lower bounce rates, send quality signals to Google, and walk prospects toward intake.</p>
-                </div>
-                <div class="callout-card">
-                    <h3>Why this matters</h3>
-                    <p>When visitors engage with a tool or quiz, they spend more time on page and demonstrate satisfaction with the answer they found. Those signals reinforce topical relevance and dramatically lift conversion rates for criminal defense leads.</p>
-                    <p style="margin-top: 12px;">Guided experiences also pre-qualify prospects. Once they commit to the first interaction, they are far more likely to complete the next step, such as calling or submitting a form.</p>
+            <!-- Client Action Item: Interactive Content -->
+            <div class="card">
+                <span class="badge">CLIENT ACTION ITEM</span>
+                <h2 class="section-header">Interactive Content</h2>
+                <p class="section-subtitle">Interactive experiences lower bounce rates, send quality signals to Google, and walk prospects toward intake.</p>
+                
+                <div class="stats-grid" style="margin: 24px 0;">
+                    <div class="stat-card">
+                        <div class="stat-label">Interactive Tools</div>
+                        <div class="stat-value">0 <span>live</span></div>
+                        <div class="stat-footnote">Opportunity to create calculators, quizzes, and assessment tools</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Target Engagement</div>
+                        <div class="stat-value">+40% <span>time on page</span></div>
+                        <div class="stat-footnote">Interactive content increases dwell time and conversion rates</div>
+                    </div>
                 </div>
 
-                <div class="flow-diagram">
+                <div class="flow-diagram" style="margin-bottom: 32px;">
                     <div class="flow-steps">
                         <div class="flow-step">
                             <span class="flow-icon">
@@ -1906,12 +2021,10 @@
                         <div class="cta-footer">Primary CTA: Start → Guide prospects through 3-5 steps and end with a warm handoff to call or schedule.</div>
                     </article>
                 </div>
-            </section>
 
-            <section class="content-section" id="trending">
-                <div class="section-heading">
-                    <h2 class="section-title">Top Trending Content (Trending Up)</h2>
-                    <p class="section-subtitle">Leverage momentum topics for quick wins. Refresh these assets first to capture surging interest.</p>
+                <div style="margin-top: 48px;">
+                    <h3 style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Top Trending Content (Trending Up)</h3>
+                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">Leverage momentum topics for quick wins. Refresh these assets first to capture surging interest.</p>
                 </div>
                 <article class="table-card trending-card">
                     <ul class="trending-list">
@@ -1973,20 +2086,26 @@
                         </li>
                     </ul>
                 </article>
-            </section>
+            </div>
 
-            <section class="content-section" id="internal-linking">
-                <div class="section-heading">
-                    <h2 class="section-title">Internal Linking</h2>
-                    <p class="section-subtitle">Structure high-authority pages so their equity flows to supporting practice and location hubs.</p>
-                </div>
-                <div class="callout-card">
-                    <h3>Why this matters</h3>
-                    <p>Well-planned internal links signal topical hierarchy to Google. Hubs with proven authority should pass link equity to deep practice area primers, which then push trust into conversion-focused contact pages.</p>
-                </div>
-                <div class="link-summary">
-                    <h3>Build more pages &amp; authority</h3>
-                    <p>Elevate high-performing hubs and point them toward emerging topics that need rankings support.</p>
+            <!-- Client Action Item: Internal Linking -->
+            <div class="card">
+                <span class="badge">CLIENT ACTION ITEM</span>
+                <h2 class="section-header">Internal Linking</h2>
+                <p class="section-subtitle">Consistent linking between hubs, subtopics, and conversion pages increases rankings across the entire criminal defense funnel.</p>
+                
+                <div class="stats-grid" style="margin: 24px 0;">
+                    <div class="stat-card">
+                        <div class="stat-label">Hub Pages</div>
+                        <div class="stat-value">3 <span>high-authority</span></div>
+                        <div class="stat-footnote">DUI, Domestic Violence, Federal Crimes cornerstone assets</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Internal Links</div>
+                        <div class="stat-value">125+ <span>connections</span></div>
+                        <div class="stat-footnote">Opportunity to strengthen link clusters and pathways</div>
+                    </div>
                 </div>
                 <div class="link-cluster">
                     <article class="link-card">
@@ -2014,39 +2133,67 @@
                         </ul>
                     </article>
                 </div>
-                <div class="link-summary">
-                    <h3>Increase overall site authority</h3>
-                    <p>Consistent linking between hubs, subtopics, and conversion pages increases rankings across the entire criminal defense funnel.</p>
-                </div>
-            </section>
+            </div>
 
-            <section class="content-section" id="content-pruning">
-                <div class="section-heading">
-                    <h2 class="section-title">Content Pruning</h2>
-                    <p class="section-subtitle">Optimize or retire underperforming assets so high-value content can shine.</p>
-                </div>
-                <div class="callout-card">
-                    <h3>Why this matters</h3>
-                    <p>Outdated or thin pages dilute authority. Audit them regularly so Google sees a concise, high-quality library.</p>
+            <!-- Client Action Item: Content Pruning -->
+            <div class="card">
+                <span class="badge">CLIENT ACTION ITEM</span>
+                <h2 class="section-header">Content Pruning</h2>
+                <p class="section-subtitle">Optimize or retire underperforming assets so high-value content can shine.</p>
+                
+                <div class="stats-grid" style="margin: 24px 0;">
+                    <div class="stat-card">
+                        <div class="stat-label">Underperforming Pages</div>
+                        <div class="stat-value">15+ <span>identified</span></div>
+                        <div class="stat-footnote">Pages with low traffic or poor conversion rates</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Optimization Impact</div>
+                        <div class="stat-value">+25% <span>traffic</span></div>
+                        <div class="stat-footnote">Potential improvement from pruning and consolidation</div>
+                    </div>
                 </div>
                 <article class="pruning-panel">
                     <h3>Strategies for underperforming content</h3>
                     <div class="pruning-grid">
                         <div class="pruning-card">
+                            <div class="pruning-card-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+                                    <circle cx="5" cy="6" r="1"/>
+                                    <circle cx="5" cy="12" r="1"/>
+                                    <circle cx="5" cy="18" r="1"/>
+                                </svg>
+                            </div>
                             <h4>Merge content</h4>
                             <p>Combine overlapping pages into a single, comprehensive resource that fully answers the intent.</p>
                         </div>
                         <div class="pruning-card">
+                            <div class="pruning-card-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                    <polyline points="15 3 21 3 21 9"/>
+                                    <line x1="10" y1="14" x2="21" y2="3"/>
+                                </svg>
+                            </div>
                             <h4>Remove or redirect</h4>
                             <p>Delete deadweight content and redirect to stronger, more relevant pages to preserve equity.</p>
                         </div>
                         <div class="pruning-card">
+                            <div class="pruning-card-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <polyline points="23 4 23 10 17 10"/>
+                                    <polyline points="1 20 1 14 7 14"/>
+                                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                                </svg>
+                            </div>
                             <h4>Refresh or rewrite</h4>
                             <p>Update outdated information, expand with new data, and improve readability to regain rankings.</p>
                         </div>
                     </div>
                 </article>
-            </section>
+            </div>
 
             <!-- Issues/Concerns Section -->
             <div class="section-divider" aria-hidden="true"></div>
