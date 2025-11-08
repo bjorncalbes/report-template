@@ -4,6 +4,51 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2025-11-08] - Changed Executive Summary to Scope
+
+### Requested
+- User requested: "create a plan for create a branch in github for editing executive summary text on sidebar then once created edit sidebar of all 18pages change the text Executive Summary to Scope"
+  - Context: Update navigation label in sidebar across all pages
+  - Reason: Rebrand "Executive Summary" navigation item to "Scope"
+  - Branch name: `design/executive-summary-to-scope`
+
+### Changed
+- Updated sidebar navigation text from "Executive Summary" to "Scope" in all 18 pages:
+  - `pages/page1.html`
+  - `pages/page2.html`
+  - `pages/page3.html`
+  - `pages/page4.html`
+  - `pages/page5.html`
+  - `pages/page6.html`
+  - `pages/page7.html`
+  - `pages/page8.html`
+  - `pages/page9.html`
+  - `pages/page10.html`
+  - `pages/page11.html`
+  - `pages/page12.html`
+  - `pages/page13.html`
+  - `pages/page14.html`
+  - `pages/page15.html`
+  - `pages/page16.html`
+  - `pages/page17.html`
+  - `pages/page18.html`
+
+### Technical Details
+- Changed `<span class="nav-label">Executive Summary</span>` to `<span class="nav-label">Scope</span>`
+- Navigation link still points to `page2.html`
+- Title attribute remains "Executive Summary" (hover tooltip)
+- No styling or functionality changes
+- All navigation features remain intact (active state, hover effects, etc.)
+
+### Quality Assurance
+- All 18 pages tested and verified working properly
+- Navigation sidebar displays "Scope" correctly
+- Link to page2.html functions correctly
+- Active state highlighting works as expected
+- No visual or styling issues introduced
+
+---
+
 ## [2025-11-05] - Added Executive Summary Navigation Item
 
 ### Requested
