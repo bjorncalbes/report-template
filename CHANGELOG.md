@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2025-11-08] - Removed Wins Icon
+
+### Requested
+- User requested: "<h1>Wins 🎉</h1> remove the icon"
+  - Context: Remove emoji icon from Wins header on page4
+  - Reason: Keep heading text plain without emoji
+  - Branch name: `hotfix/remove-wins-icon`
+
+### Changed
+- Updated `pages/page4.html` Wins header to display "Wins" without emoji
+
+---
+
 ## [2025-11-08] - Changed Executive Summary to Scope
 
 ### Requested
