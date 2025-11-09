@@ -1,232 +1,375 @@
+/**
+ * Hurwitz Law Group - PDF Export Client Script
+ *
+ * This script handles the "Export to PDF" button functionality.
+ * It communicates with the Node.js server to generate a combined PDF
+ * of all HTML pages in the /pages folder.
+ *
+ * Usage: The exportToPDF() function is called when the user clicks
+ * the "Export to PDF" button in the sidebar navigation.
+ */
+
 (function () {
+    // Prevent duplicate initialization
     if (window.exportToPDF) {
         return;
     }
 
-    function getPageList() {
-        // Collect all anchor hrefs that look like pageN.html anywhere in the doc
-        const hrefs = Array.from(document.querySelectorAll('a[href]'))
-            .map(a => a.getAttribute('href'))
-            .filter(Boolean)
-            .map(href => href.split('#')[0]);
+    const DEFAULT_PAGE = 'page1.html';
 
-        const pages = [];
-        const seen = new Set();
-        const pageRegex = /(^|\/)page(\d+)\.html$/i;
+    /**
+     * Configuration
+     */
+    const CONFIG = {
+        // Server endpoint for PDF generation
+        apiEndpoint: 'http://localhost:3000/api/generate-pdf',
 
-        for (const href of hrefs) {
-            const file = href.split('/').pop();
-            const m = file && file.match(pageRegex);
-            if (m && !seen.has(file)) {
-                seen.add(file);
-                pages.push({ file, num: parseInt(m[2], 10) });
-            }
-        }
+        // PDF filename template (fallback if server does not set one)
+        pdfFilename: 'hurwitz-report-{pages}.pdf',
 
-        // Ensure current page is included
-        const currentPath = window.location.pathname.split('/').pop() || 'page1.html';
-        if (!seen.has(currentPath)) {
-            const m = currentPath.match(pageRegex);
-            pages.push({ file: currentPath, num: m ? parseInt(m[2], 10) : Number.MAX_SAFE_INTEGER });
-        }
+        // Request timeout (milliseconds)
+        timeout: 300000 // 5 minutes - allows time for all 18 pages to render
+    };
 
-        // Sort numerically by page number, unknowns at end
-        pages.sort((a, b) => a.num - b.num);
-        return pages.map(p => p.file);
-    }
-
-    async function fetchPageContent(url) {
-        const response = await fetch(url, { cache: 'no-store' });
-        if (!response.ok) {
-            throw new Error(`Unable to load ${url} (${response.status})`);
-        }
-        const text = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-        const mainContent = doc.querySelector('.main-content') || doc.body;
-        const styles = Array.from(doc.querySelectorAll('style'))
-            .map(style => style.textContent || '')
-            .join('\n');
-        const styleLinks = Array.from(doc.querySelectorAll('link[rel="stylesheet"][href]'))
-            .map(l => l.getAttribute('href'))
-            .filter(Boolean);
-        return { mainContent, styles, styleLinks };
-    }
-
-    function createHiddenContainer() {
-        const container = document.createElement('div');
-        container.style.position = 'fixed';
-        container.style.left = '-9999px';
-        container.style.top = '0';
-        container.style.width = '1200px';
-        container.style.background = '#ffffff';
-        container.style.zIndex = '-1';
-        document.body.appendChild(container);
-        return container;
-    }
-
+    /**
+     * Create and display the progress overlay
+     * Shows a modal overlay while PDF is being generated
+     *
+     * @returns {HTMLElement} The overlay element
+     */
     function createOverlay() {
         const overlay = document.createElement('div');
         overlay.id = 'pdf-export-overlay';
+
+        // Styling for the overlay
         overlay.style.position = 'fixed';
         overlay.style.top = '0';
         overlay.style.left = '0';
         overlay.style.width = '100%';
         overlay.style.height = '100%';
         overlay.style.background = 'rgba(0, 0, 0, 0.35)';
+        overlay.style.backdropFilter = 'blur(4px)';
         overlay.style.display = 'flex';
         overlay.style.alignItems = 'center';
         overlay.style.justifyContent = 'center';
         overlay.style.zIndex = '10000';
 
+        // Modal content with progress message
         overlay.innerHTML = `
-            <div style="background: #ffffff; padding: 30px 40px; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); text-align: center; max-width: 360px;">
-                <h3 style="margin-bottom: 12px; color: #2B4C7E; font-size: 20px;">Preparing PDF…</h3>
-                <p id="pdf-export-progress" style="margin: 0; color: #555; font-size: 15px;">Gathering pages…</p>
+            <div style="
+                background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                padding: 40px 50px;
+                border-radius: 18px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                text-align: center;
+                max-width: 420px;
+                border: 1px solid rgba(255, 255, 255, 0.8);
+            ">
+                <div style="
+                    width: 48px;
+                    height: 48px;
+                    margin: 0 auto 20px;
+                    border: 4px solid #0445ac;
+                    border-top-color: transparent;
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                "></div>
+                <h3 style="
+                    margin: 0 0 12px 0;
+                    color: #0b1e3d;
+                    font-size: 22px;
+                    font-weight: 600;
+                    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+                ">Generating PDF Report</h3>
+                <p id="pdf-export-progress" style="
+                    margin: 0;
+                    color: rgba(11, 30, 61, 0.72);
+                    font-size: 15px;
+                    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+                ">Processing all pages...</p>
+                <p style="
+                    margin: 16px 0 0 0;
+                    color: rgba(11, 30, 61, 0.5);
+                    font-size: 13px;
+                    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+                ">This may take a minute</p>
             </div>
+            <style>
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            </style>
         `;
 
         document.body.appendChild(overlay);
         return overlay;
     }
 
-    async function renderPageIntoPDF({ url, hiddenContainer, pdf, isFirstPage, progressEl }) {
-        try {
-            progressEl.textContent = `Capturing ${url}…`;
-            const { mainContent, styles, styleLinks } = await fetchPageContent(url);
-            const clone = mainContent.cloneNode(true);
-
-            hiddenContainer.innerHTML = '';
-
-            if (styles) {
-                const styleTag = document.createElement('style');
-                styleTag.textContent = styles;
-                hiddenContainer.appendChild(styleTag);
-            }
-
-            // Also include external stylesheets and wait for them to load
-            const linkLoadPromises = [];
-            if (styleLinks && styleLinks.length) {
-                for (const href of styleLinks) {
-                    const linkEl = document.createElement('link');
-                    linkEl.rel = 'stylesheet';
-                    linkEl.href = new URL(href, url).href;
-                    const p = new Promise((resolve, reject) => {
-                        linkEl.onload = resolve;
-                        linkEl.onerror = resolve; // fail open to avoid stalling
-                    });
-                    linkLoadPromises.push(p);
-                    hiddenContainer.appendChild(linkEl);
-                }
-            }
-
-            clone.style.width = '100%';
-            clone.style.margin = '0 auto';
-            hiddenContainer.appendChild(clone);
-
-            // Wait for next frame, stylesheets, and fonts
-            await new Promise(resolve => requestAnimationFrame(resolve));
-            if (linkLoadPromises.length) {
-                await Promise.race([
-                    Promise.all(linkLoadPromises),
-                    new Promise(r => setTimeout(r, 2000)) // cap wait
-                ]);
-            }
-            if (document.fonts && document.fonts.ready) {
-                try { await Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1000))]); } catch (e) {}
-            }
-            await new Promise(r => setTimeout(r, 150));
-
-            // Guard against long-running html2canvas by timing out
-            const canvas = await Promise.race([
-                html2canvas(clone, {
-                    scale: 1.5,
-                    useCORS: true,
-                    backgroundColor: '#ffffff',
-                    scrollX: 0,
-                    scrollY: 0
-                }),
-                new Promise((_, rej) => setTimeout(() => rej(new Error('html2canvas timeout')), 15000))
-            ]);
-
-            const imgData = canvas.toDataURL('image/png');
-            const pageWidth = pdf.internal.pageSize.getWidth();
-            const pageHeight = pdf.internal.pageSize.getHeight();
-
-            const imgProps = pdf.getImageProperties(imgData);
-            const imgWidth = pageWidth;
-            const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
-
-            let heightLeft = imgHeight;
-            let position = 0;
-
-            if (!isFirstPage.value) {
-                pdf.addPage();
-            }
-            isFirstPage.value = false;
-
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-
-            while (heightLeft > 0) {
-                position -= pageHeight;
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-            }
-        } catch (error) {
-            console.error('Failed to capture page:', url, error);
+    /**
+     * Remove the progress overlay
+     *
+     * @param {HTMLElement} overlay - The overlay element to remove
+     */
+    function removeOverlay(overlay) {
+        if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
         }
     }
 
-    window.exportToPDF = async function exportToPDF() {
-        if (!window.html2canvas || !window.jspdf) {
-            alert('Missing PDF libraries. Please ensure html2canvas and jsPDF are loaded.');
-            return;
-        }
-
-        const pageList = getPageList();
-        if (!pageList.length) {
-            alert('No pages found to export.');
-            return;
-        }
-
-        const overlay = createOverlay();
+    /**
+     * Update the progress message
+     *
+     * @param {HTMLElement} overlay - The overlay element
+     * @param {string} message - The progress message to display
+     */
+    function updateProgress(overlay, message) {
         const progressEl = overlay.querySelector('#pdf-export-progress');
-        const hiddenContainer = createHiddenContainer();
+        if (progressEl) {
+            progressEl.textContent = message;
+        }
+    }
+
+    /**
+     * Sanitize the requested page name so we never send invalid paths to the server.
+     *
+     * @param {string} pageName
+     * @returns {string}
+     */
+    function sanitizePageName(pageName) {
+        if (typeof pageName !== 'string' || !pageName.trim()) {
+            return DEFAULT_PAGE;
+        }
+
+        const trimmed = pageName.trim();
+
+        if (!trimmed.toLowerCase().endsWith('.html')) {
+            return DEFAULT_PAGE;
+        }
+
+        if (!/^[a-zA-Z0-9_-]+\.html$/.test(trimmed)) {
+            return DEFAULT_PAGE;
+        }
+
+        return trimmed;
+    }
+
+    /**
+     * Determine which HTML file is currently being viewed.
+     * Falls back to page1.html when invoked from index.html or other root files.
+     *
+     * @returns {string}
+     */
+    function getCurrentPageFromLocation() {
+        const pathname = window.location.pathname || '';
+        const segments = pathname.split('/');
+        const lastSegment = segments.pop() || '';
+
+        // We only consider files inside /pages/ valid targets.
+        if (!pathname.includes('/pages/')) {
+            return DEFAULT_PAGE;
+        }
+
+        return sanitizePageName(lastSegment);
+    }
+
+    /**
+     * Decide which page should be exported.
+     *
+     * @param {string} explicitPage
+     * @returns {string}
+     */
+    function resolvePagesToExport(targetPages) {
+        if (Array.isArray(targetPages)) {
+            const sanitized = targetPages
+                .map(sanitizePageName)
+                .filter(Boolean);
+
+            const unique = [...new Set(sanitized)];
+            if (unique.length > 0) {
+                return unique;
+            }
+        } else if (typeof targetPages === 'string' && targetPages.trim()) {
+            return [sanitizePageName(targetPages)];
+        }
+
+        return [getCurrentPageFromLocation()];
+    }
+
+    /**
+     * Construct the API URL for the requested page(s).
+     *
+     * @param {string[]} pages
+     * @returns {string}
+     */
+    function buildEndpointForPages(pages) {
+        const url = new URL(CONFIG.apiEndpoint);
+
+        if (pages.length === 1) {
+            url.searchParams.set('page', pages[0]);
+        } else {
+            url.searchParams.set('pages', pages.join(','));
+        }
+
+        return url.toString();
+    }
+
+    /**
+     * Check if the server is running
+     *
+     * @returns {Promise<boolean>} True if server is reachable
+     */
+    async function checkServerStatus() {
+        try {
+            const response = await fetch('http://localhost:3000/api/health', {
+                method: 'GET',
+                signal: AbortSignal.timeout(5000) // 5 second timeout
+            });
+            return response.ok;
+        } catch (error) {
+            return false;
+        }
+    }
+
+    /**
+     * Download a blob as a file
+     *
+     * @param {Blob} blob - The blob to download
+     * @param {string} filename - The filename for the download
+     */
+    function downloadBlob(blob, filename) {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.style.display = 'none';
+
+        document.body.appendChild(link);
+        link.click();
+
+        // Cleanup
+        setTimeout(() => {
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        }, 100);
+    }
+
+    /**
+     * Figure out the best filename to use for the downloaded PDF.
+     *
+     * @param {Response} response
+     * @param {string} pageName
+     * @returns {string}
+     */
+    function resolveDownloadFilename(response, pages) {
+        const disposition = response.headers.get('Content-Disposition') || '';
+        const match = disposition.match(/filename="?([^\";]+)"?/i);
+
+        if (match && match[1]) {
+            return match[1];
+        }
+
+        const pageSlug = pages
+            .map(page => page.replace('.html', ''))
+            .join('-');
+
+        return CONFIG.pdfFilename
+            .replace('{pages}', pageSlug)
+            .replace('{page}', pages[0].replace('.html', ''));
+    }
+
+    /**
+     * Main export function - generates and downloads the PDF
+     * This function is called when the "Export to PDF" button is clicked
+     */
+    window.exportToPDF = async function exportToPDF(targetPages) {
+        let overlay = null;
 
         try {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const isFirstPage = { value: true };
+            // Show progress overlay
+            overlay = createOverlay();
+            const pagesToExport = resolvePagesToExport(targetPages);
+            updateProgress(overlay, `Connecting to server for ${pagesToExport.join(', ')}...`);
 
-            for (let i = 0; i < pageList.length; i++) {
-                const href = pageList[i];
-                const absoluteUrl = new URL(href, window.location.origin + window.location.pathname).href;
-                progressEl.textContent = `Processing ${i + 1} of ${pageList.length}`;
-                await renderPageIntoPDF({
-                    url: absoluteUrl,
-                    hiddenContainer,
-                    pdf,
-                    isFirstPage,
-                    progressEl
-                });
+            // Check if server is running
+            const serverRunning = await checkServerStatus();
+            if (!serverRunning) {
+                throw new Error(
+                    'PDF Export Server is not running.\n\n' +
+                    'Please start the server by running:\n' +
+                    'npm install (first time only)\n' +
+                    'npm start\n\n' +
+                    'Then try exporting again.'
+                );
             }
 
-            progressEl.textContent = 'Finalising PDF…';
-            pdf.save('hurwitz-law-group-report.pdf');
+            // Request PDF generation from server
+            updateProgress(overlay, 'Generating PDF...');
+
+            const endpoint = buildEndpointForPages(pagesToExport);
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), CONFIG.timeout);
+
+            const response = await fetch(endpoint, {
+                method: 'GET',
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            // Check response status
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(
+                    errorData.message ||
+                    `Server error: ${response.status} ${response.statusText}`
+                );
+            }
+
+            // Get PDF blob
+            updateProgress(overlay, 'Downloading PDF...');
+            const pdfBlob = await response.blob();
+
+            // Validate that we got a PDF
+            if (pdfBlob.type !== 'application/pdf') {
+                throw new Error('Invalid response from server (not a PDF)');
+            }
+
+            // Download the PDF
+            const filename = resolveDownloadFilename(response, pagesToExport);
+            downloadBlob(pdfBlob, filename);
+
+            // Success! Update progress briefly before closing
+            updateProgress(overlay, `PDF downloaded successfully (${filename})!`);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
         } catch (error) {
             console.error('PDF export failed:', error);
-            alert('PDF export failed. Please check the console for details.');
-        } finally {
-            if (hiddenContainer && hiddenContainer.parentNode) {
-                hiddenContainer.parentNode.removeChild(hiddenContainer);
+
+            // User-friendly error messages
+            let errorMessage = 'Failed to generate PDF.';
+
+            if (error.name === 'AbortError') {
+                errorMessage = 'PDF generation timed out. The report may be too large.\n\nPlease try again or contact support.';
+            } else if (error.message.includes('PDF Export Server is not running')) {
+                errorMessage = error.message;
+            } else if (error.message.includes('Failed to fetch')) {
+                errorMessage = 'Cannot connect to PDF Export Server.\n\nPlease ensure the server is running:\nnpm start';
+            } else {
+                errorMessage = `Error: ${error.message}`;
             }
-            if (overlay && overlay.parentNode) {
-                overlay.parentNode.removeChild(overlay);
+
+            alert(errorMessage);
+
+        } finally {
+            // Always remove the overlay
+            if (overlay) {
+                removeOverlay(overlay);
             }
         }
     };
+
+    // Log initialization
+    console.log('PDF Export client loaded. Server endpoint:', CONFIG.apiEndpoint);
 })();
-
-

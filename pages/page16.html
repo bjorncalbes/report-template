@@ -967,7 +967,7 @@
         </ul>
         <div class="nav-divider"></div>
         <div class="pdf-export-btn">
-            <a href="#" class="pdf-link" onclick="exportToPDF(); return false;" title="Export to PDF">
+            <a href="#" class="pdf-link" onclick="return exportFullReport(event);" title="Export to PDF">
                 <span class="nav-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M14 3H9a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h11" />
@@ -1489,8 +1489,11 @@
         });
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" referrerpolicy="no-referrer"></script>
-    <script src="pdf-export.js"></script>
+    <!-- PDF Export Client Script -->
+    
+        <script src="../assets/js/pdf-export.js"></script>
+<script src="../assets/js/export-full-report.js"></script>
 </body>
 </html>
+
+

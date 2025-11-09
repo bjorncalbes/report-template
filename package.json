@@ -1,0 +1,24 @@
+{
+  "name": "hurwitz-hls-report",
+  "version": "1.0.0",
+  "description": "Hurwitz Law Group High Level Strategy Report - PDF Export Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "pdf",
+    "report",
+    "puppeteer",
+    "express"
+  ],
+  "author": "LHD",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "puppeteer": "^21.6.1",
+    "cors": "^2.8.5",
+    "pdf-lib": "^1.17.1"
+  }
+}

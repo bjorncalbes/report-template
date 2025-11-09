@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hurwitz HLS Report</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f3f5f9;
+            --card-bg: #ffffff;
+            --border: rgba(15, 30, 65, 0.08);
+            --primary: #0a84ff;
+            --primary-dark: #0057c7;
+            --text: #0b1326;
+            --muted: rgba(11, 19, 38, 0.68);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(145deg, #f9fbff 0%, #e7ecf5 100%);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        main {
+            width: min(1200px, 92vw);
+            margin: 48px auto;
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: clamp(32px, 6vw, 56px);
+            box-shadow: 0 40px 90px rgba(8, 23, 46, 0.12);
+            border: 1px solid var(--border);
+        }
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        header img {
+            width: 76px;
+            height: 76px;
+        }
+
+        header div h1 {
+            margin: 0;
+            font-size: clamp(26px, 4vw, 36px);
+        }
+
+        header div p {
+            margin: 8px 0 0;
+            color: var(--muted);
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 26px;
+            border-radius: 16px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 15px 35px rgba(10, 132, 255, 0.25);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-primary:active {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: rgba(10, 132, 255, 0.08);
+            color: var(--primary);
+            border: 1px solid rgba(10, 132, 255, 0.2);
+        }
+
+        section {
+            border-top: 1px solid var(--border);
+            padding-top: 32px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .page-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page-grid li {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fdfdff;
+        }
+
+        .page-grid a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .page-grid span {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media (max-width: 640px) {
+            main {
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <img src="assets/images/logos/client-logo.png" alt="Hurwitz Law Group logo" loading="lazy">
+        <div>
+            <h1>High Level Strategy Report</h1>
+            <p>Use the controls below to open chapters or export the full report as a polished PDF.</p>
+        </div>
+    </header>
+
+    <div class="actions">
+        <a class="btn btn-secondary" href="pages/page1.html">Open Page 1</a>
+        <a class="btn btn-secondary" href="pages/page2.html">Open Page 2</a>
+        <button id="export-btn" class="btn btn-primary" type="button">
+            Export Page 1
+        </button>
+        <button id="export-btn-double" class="btn btn-primary" type="button">
+            Export Pages 1 + 2
+        </button>
+        <button id="export-btn-all" class="btn btn-primary" type="button">
+            Export Pages 1 – 18
+        </button>
+    </div>
+
+    <section>
+        <h2>Included Pages</h2>
+        <ul class="page-grid">
+            <li><a href="pages/page1.html">page1.html</a><span>Executive overview</span></li>
+            <li><a href="pages/page2.html">page2.html</a><span>Firm positioning</span></li>
+            <li><a href="pages/page3.html">page3.html</a><span>Marketing audit</span></li>
+            <li><a href="pages/page4.html">page4.html</a><span>SWOT summary</span></li>
+            <li><a href="pages/page5.html">page5.html</a><span>Competitive analysis</span></li>
+            <li><a href="pages/page6.html">page6.html</a><span>Traffic insights</span></li>
+            <li><a href="pages/page7.html">page7.html</a><span>SEO findings</span></li>
+            <li><a href="pages/page8.html">page8.html</a><span>Content performance</span></li>
+            <li><a href="pages/page9.html">page9.html</a><span>Paid search</span></li>
+            <li><a href="pages/page10.html">page10.html</a><span>UX &amp; CRO</span></li>
+            <li><a href="pages/page11.html">page11.html</a><span>Brand narrative</span></li>
+            <li><a href="pages/page12.html">page12.html</a><span>Client journey</span></li>
+            <li><a href="pages/page13.html">page13.html</a><span>Media plan</span></li>
+            <li><a href="pages/page14.html">page14.html</a><span>Reputation</span></li>
+            <li><a href="pages/page15.html">page15.html</a><span>Opportunity map</span></li>
+            <li><a href="pages/page16.html">page16.html</a><span>Action plan</span></li>
+            <li><a href="pages/page17.html">page17.html</a><span>Forecast</span></li>
+            <li><a href="pages/page18.html">page18.html</a><span>Appendix</span></li>
+        </ul>
+    </section>
+
+    <footer>
+        Need to update a chapter? Edit the matching file inside <code>/pages</code>; the export button always uses
+        the latest HTML.
+    </footer>
+</main>
+
+<!-- PDF export client -->
+<script src="assets/js/pdf-export.js"></script>
+<script>
+    // Keep hook simple so swapping the button ID later is trivial.
+    function triggerExport(pages) {
+        if (typeof exportToPDF === 'function') {
+            exportToPDF(pages);
+        } else {
+            alert('PDF exporter not loaded. Check that assets/js/pdf-export.js is available.');
+        }
+    }
+
+    document.getElementById('export-btn').addEventListener('click', () => {
+        triggerExport('page1.html');
+    });
+
+    document.getElementById('export-btn-double').addEventListener('click', () => {
+        triggerExport(['page1.html', 'page2.html']);
+    });
+
+    document.getElementById('export-btn-all').addEventListener('click', () => {
+        triggerExport([
+            'page1.html', 'page2.html', 'page3.html', 'page4.html', 'page5.html', 'page6.html',
+            'page7.html', 'page8.html', 'page9.html', 'page10.html', 'page11.html', 'page12.html',
+            'page13.html', 'page14.html', 'page15.html', 'page16.html', 'page17.html', 'page18.html'
+        ]);
+    });
+</script>
+</body>
+</html>

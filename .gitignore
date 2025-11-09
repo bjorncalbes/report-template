@@ -21,6 +21,9 @@ desktop.ini
 # Node modules (if using npm)
 node_modules/
 
+# Generated PDFs
+*.pdf
+
 # Build outputs (if using build tools)
 dist/
 build/
