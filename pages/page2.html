@@ -590,6 +590,29 @@
             transition: all 0.2s ease;
         }
 
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(4, 69, 172, 0), rgba(4, 69, 172, 0.2), rgba(4, 69, 172, 0));
+            border-radius: 999px;
+            margin: 40px 0;
+            box-shadow: 0 12px 24px rgba(4, 69, 172, 0.08);
+        }
+
+        .notes-section {
+            margin-top: clamp(56px, 7vw, 80px);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(32px, 5vw, 40px);
+        }
+
+        .notes-section .section-divider {
+            margin: 0;
+        }
+
+        .notes-section .section-header {
+            margin-top: 0;
+        }
+
         .text-area:focus {
             outline: none;
             border-color: var(--accent-color);
@@ -1074,8 +1097,67 @@
             </div>
         </div>
 
-        </div>
+        <section class="notes-section" aria-label="Issues and action items">
+            <div class="section-divider" aria-hidden="true"></div>
+
+            <div>
+                <h2 class="section-header">Issues/Concerns</h2>
+                <textarea
+                    id="issues-concerns-page2"
+                    onblur="autoSavePage2Notes()"
+                    placeholder="Enter any issues or concerns here..."
+                    class="text-area"
+                ></textarea>
+            </div>
+
+            <div>
+                <h2 class="section-header">Action Items</h2>
+                <textarea
+                    id="action-items-page2"
+                    onblur="autoSavePage2Notes()"
+                    placeholder="Enter action items here..."
+                    class="text-area"
+                ></textarea>
+            </div>
+        </section>
     </div>
+</div>
+
+    <script>
+        function autoSavePage2Notes() {
+            const issuesField = document.getElementById('issues-concerns-page2');
+            const actionsField = document.getElementById('action-items-page2');
+            const notes = {
+                issues: issuesField ? issuesField.value : '',
+                actions: actionsField ? actionsField.value : ''
+            };
+
+            try {
+                localStorage.setItem('page2Notes', JSON.stringify(notes));
+            } catch (error) {
+                console.warn('Unable to save notes for page2', error);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const savedNotes = localStorage.getItem('page2Notes');
+                if (savedNotes) {
+                    const notes = JSON.parse(savedNotes);
+                    const issuesField = document.getElementById('issues-concerns-page2');
+                    const actionsField = document.getElementById('action-items-page2');
+                    if (issuesField && typeof notes?.issues === 'string') {
+                        issuesField.value = notes.issues;
+                    }
+                    if (actionsField && typeof notes?.actions === 'string') {
+                        actionsField.value = notes.actions;
+                    }
+                }
+            } catch (error) {
+                console.warn('Unable to load saved notes for page2', error);
+            }
+        });
+    </script>
 
     <script>
         // Active page highlighting

@@ -198,6 +198,21 @@
             margin: 0;
         }
 
+        .notes-section {
+            margin-top: clamp(56px, 7vw, 80px);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(32px, 5vw, 40px);
+        }
+
+        .notes-section .section-divider {
+            margin: 0;
+        }
+
+        .notes-section .section-header {
+            margin-top: 0;
+        }
+
         /* Hero Section */
         .hero-section {
             position: relative;
@@ -842,29 +857,29 @@
             </div>
         </div>
 
-        <!-- Issues/Concerns Section -->
-        <div class="section-divider" aria-hidden="true"></div>
-        
-        <div>
-            <h2 class="section-header">Issues/Concerns</h2>
-            <textarea
-                id="issues-concerns-page14"
-                onblur="autoSavePage14()"
-                placeholder="Enter any issues or concerns here..."
-                class="text-area"
-            ></textarea>
-        </div>
+        <section class="notes-section" aria-label="Issues and action items">
+            <div class="section-divider" aria-hidden="true"></div>
+            
+            <div>
+                <h2 class="section-header">Issues/Concerns</h2>
+                <textarea
+                    id="issues-concerns-page14"
+                    onblur="autoSavePage14()"
+                    placeholder="Enter any issues or concerns here..."
+                    class="text-area"
+                ></textarea>
+            </div>
 
-        <!-- Action Items Section -->
-        <div>
-            <h2 class="section-header">Action Items</h2>
-            <textarea
-                id="action-items-page14"
-                onblur="autoSavePage14()"
-                placeholder="Enter action items here..."
-                class="text-area"
-            ></textarea>
-        </div>
+            <div>
+                <h2 class="section-header">Action Items</h2>
+                <textarea
+                    id="action-items-page14"
+                    onblur="autoSavePage14()"
+                    placeholder="Enter action items here..."
+                    class="text-area"
+                ></textarea>
+            </div>
+        </section>
     </div>
 
     <script>

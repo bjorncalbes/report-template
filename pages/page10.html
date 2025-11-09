@@ -320,6 +320,21 @@
             margin-top: 8px;
         }
 
+        .notes-section {
+            margin-top: clamp(56px, 7vw, 80px);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(32px, 5vw, 40px);
+        }
+
+        .notes-section .section-divider {
+            margin: 0;
+        }
+
+        .notes-section .section-header {
+            margin-top: 0;
+        }
+
         .section-subheader {
             font-size: 17px;
             color: var(--text-secondary);
@@ -2200,29 +2215,29 @@
                 </article>
             </div>
 
-            <!-- Issues/Concerns Section -->
-            <div class="section-divider" aria-hidden="true"></div>
-            
-            <div style="margin-top: 8px;">
-                <h2 class="section-header">Issues/Concerns</h2>
-                <textarea 
-                    id="issues-concerns-page10" 
-                    onblur="autoSavePage10()" 
-                    placeholder="Enter any issues or concerns here..."
-                    class="text-area"
-                ></textarea>
-            </div>
+            <section class="notes-section" aria-label="Issues and action items">
+                <div class="section-divider" aria-hidden="true"></div>
 
-            <!-- Action Items Section -->
-            <div style="margin-top: 8px;">
-                <h2 class="section-header">Action Items</h2>
-                <textarea 
-                    id="action-items-page10" 
-                    onblur="autoSavePage10()" 
-                    placeholder="Enter action items here..."
-                    class="text-area"
-                ></textarea>
-            </div>
+                <div>
+                    <h2 class="section-header">Issues/Concerns</h2>
+                    <textarea 
+                        id="issues-concerns-page10" 
+                        onblur="autoSavePage10()" 
+                        placeholder="Enter any issues or concerns here..."
+                        class="text-area"
+                    ></textarea>
+                </div>
+
+                <div>
+                    <h2 class="section-header">Action Items</h2>
+                    <textarea 
+                        id="action-items-page10" 
+                        onblur="autoSavePage10()" 
+                        placeholder="Enter action items here..."
+                        class="text-area"
+                    ></textarea>
+                </div>
+            </section>
         </div>
     </main>
 

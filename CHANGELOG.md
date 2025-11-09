@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2025-11-08] - Client Action Items Priority Sequence
+
+### Requested
+- User requested: "@execute.md on page15.html add the following features 1. you can clcik and drag an action item to move it in the sequence 2. you can click the action priority and change it to either urgent, high, medium and once change it will also change the color of the action item depending on the action priority chosen"
+  - Context: Enhance the client action items experience on `pages/page15.html` for live executive reviews.
+  - Branch name: `feature/client-action-items-priority-sequence`
+  - Constraints: Maintain minimalist Apple-inspired styling while persisting local data.
+
+### Added
+- Created `Doc/PLAN/feature/client-action-items-priority-sequence-PLAN.md` documenting drag-and-drop and priority-control requirements with references to `Doc/Command` guidance.
+
+### Changed
+- Updated `pages/page15.html` to support HTML5 drag-and-drop reordering with persistent `clientActionItems` storage and reorder visuals.
+- Updated `pages/page15.html` to replace static priority badges with an interactive menu that updates item styling, statistics, and accessibility attributes.
+- Updated `pages/page16.html` to mirror drag-and-drop sequencing and priority editing, persisting updates via the `lhdActionItems` localStorage namespace.
+
+### Deprecated
+- None.
+
+### Removed
+- None.
+
+### Fixed
+- None.
+
+### Security
+- None.
+
+---
+
 ## [2025-11-08] - Removed Wins Icon
 
 ### Requested

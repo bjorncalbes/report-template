@@ -209,6 +209,55 @@
             margin: 0;
         }
 
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(4, 69, 172, 0), rgba(4, 69, 172, 0.2), rgba(4, 69, 172, 0));
+            border-radius: 999px;
+            margin: 40px 0;
+            box-shadow: 0 12px 24px rgba(4, 69, 172, 0.08);
+        }
+
+        .notes-section {
+            margin-top: clamp(56px, 7vw, 80px);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(32px, 5vw, 40px);
+        }
+
+        .notes-section .section-divider {
+            margin: 0;
+        }
+
+        .notes-section .section-header {
+            margin-top: 0;
+        }
+
+        .notes-textarea {
+            width: 100%;
+            min-height: 140px;
+            padding: 18px;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+            color: #1d1d1f;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1.5px solid rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            resize: vertical;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .notes-textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.12), 0 2px 14px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+        }
+
+        .notes-textarea::placeholder {
+            color: rgba(60, 60, 67, 0.6);
+        }
+
 .main-content {
             margin-left: var(--sidebar-width);
             padding: 0;
@@ -338,6 +387,14 @@
         .action-items-list {
             display: grid;
             gap: 16px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .action-items-list.drag-target {
+            outline: 2px dashed rgba(0, 113, 227, 0.25);
+            outline-offset: 6px;
+            border-radius: 16px;
         }
 
         .action-item {
@@ -349,10 +406,47 @@
             display: flex;
             gap: 20px;
             align-items: start;
+            position: relative;
+            cursor: grab;
         }
 
         .action-item:hover {
             box-shadow: var(--shadow-sm);
+        }
+
+        .action-item:active {
+            cursor: grabbing;
+        }
+
+        .action-item.dragging {
+            opacity: 0.65;
+            border-style: dashed;
+        }
+
+        .action-item.drag-over {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+        }
+
+        .action-drag-handle {
+            width: 18px;
+            min-width: 18px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            cursor: grab;
+            margin-top: 2px;
+        }
+
+        .action-drag-handle svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .action-item.dragging .action-drag-handle {
+            cursor: grabbing;
         }
 
         .action-item[data-priority="urgent"] {
@@ -450,6 +544,25 @@
             font-weight: 600;
             background: rgba(0, 0, 0, 0.05);
             color: var(--text-secondary);
+            border: none;
+            cursor: pointer;
+            appearance: none;
+            transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .action-priority svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .priority-caret {
+            width: 12px;
+            height: 12px;
+        }
+
+        .action-priority:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
         }
 
         .action-priority.urgent {
@@ -465,6 +578,76 @@
         .action-priority.medium {
             background: rgba(255, 204, 0, 0.2);
             color: #cc9900;
+        }
+
+        .action-priority-control {
+            position: relative;
+        }
+
+        .priority-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 180px;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
+            background: var(--surface-white);
+            box-shadow: var(--shadow-md);
+            z-index: 20;
+        }
+
+        .priority-menu[hidden] {
+            display: none;
+        }
+
+        .priority-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .priority-option:hover,
+        .priority-option:focus-visible {
+            background: var(--surface-light);
+            color: var(--text-primary);
+        }
+
+        .priority-option:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 1px;
+        }
+
+        .priority-option.active {
+            background: rgba(0, 113, 227, 0.12);
+        }
+
+        .priority-option.urgent {
+            color: #d70015;
+        }
+
+        .priority-option.high {
+            color: #ff6b6b;
+        }
+
+        .priority-option.medium {
+            color: #cc9900;
+        }
+
+        .priority-icon {
+            font-size: 16px;
+            line-height: 1;
         }
 
         /* Add New Action Button */
@@ -882,8 +1065,68 @@
                 Add New Action Item
             </button>
         </div>
+
+        <section class="notes-section" aria-label="Issues and action items">
+            <div class="section-divider" aria-hidden="true"></div>
+
+            <div>
+                <h2 class="section-header">Issues/Concerns</h2>
+                <textarea
+                    id="issues-concerns-page15"
+                    class="notes-textarea"
+                    placeholder="Enter any issues or concerns here..."
+                    onblur="autoSavePage15Notes()"
+                ></textarea>
+            </div>
+
+            <div>
+                <h2 class="section-header">Action Items</h2>
+                <textarea
+                    id="action-items-page15"
+                    class="notes-textarea"
+                    placeholder="Enter action items here..."
+                    onblur="autoSavePage15Notes()"
+                ></textarea>
+            </div>
+        </section>
         </div>
     </div>
+
+    <script>
+        function autoSavePage15Notes() {
+            const issuesField = document.getElementById('issues-concerns-page15');
+            const actionsField = document.getElementById('action-items-page15');
+            const notes = {
+                issues: issuesField ? issuesField.value : '',
+                actions: actionsField ? actionsField.value : ''
+            };
+
+            try {
+                localStorage.setItem('page15Notes', JSON.stringify(notes));
+            } catch (error) {
+                console.warn('Unable to save notes for page15', error);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const savedNotes = localStorage.getItem('page15Notes');
+                if (savedNotes) {
+                    const notes = JSON.parse(savedNotes);
+                    const issuesField = document.getElementById('issues-concerns-page15');
+                    const actionsField = document.getElementById('action-items-page15');
+                    if (issuesField && typeof notes?.issues === 'string') {
+                        issuesField.value = notes.issues;
+                    }
+                    if (actionsField && typeof notes?.actions === 'string') {
+                        actionsField.value = notes.actions;
+                    }
+                }
+            } catch (error) {
+                console.warn('Unable to load saved notes for page15', error);
+            }
+        });
+    </script>
 
     <script>
         // Sample action items data
@@ -925,6 +1168,24 @@
             }
         ];
 
+        const PRIORITY_SETTINGS = {
+            urgent: { label: 'Urgent', icon: '🔴' },
+            high: { label: 'High', icon: '🟠' },
+            medium: { label: 'Medium', icon: '🟡' }
+        };
+
+        const PRIORITY_ORDER = ['urgent', 'high', 'medium'];
+
+        const actionItemsContainer = document.getElementById('actionItemsList');
+        if (actionItemsContainer) {
+            actionItemsContainer.setAttribute('role', 'list');
+        }
+
+        let containerDragHandlersBound = false;
+        let priorityMenuListenerBound = false;
+        let openPriorityMenuId = null;
+        let draggedItemId = null;
+
         // Load saved action items from localStorage
         function loadActionItems() {
             // Clear old localStorage data to use updated defaults
@@ -944,27 +1205,222 @@
             updateStats();
         }
 
+        function ensurePriorityMenuListener() {
+            if (priorityMenuListenerBound) {
+                return;
+            }
+            document.addEventListener('click', () => {
+                closePriorityMenus();
+            });
+            priorityMenuListenerBound = true;
+        }
+
+        function closePriorityMenus() {
+            document.querySelectorAll('.priority-menu[data-open="true"]').forEach(menu => {
+                menu.hidden = true;
+                menu.dataset.open = 'false';
+                const toggle = menu.previousElementSibling;
+                if (toggle) {
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+            openPriorityMenuId = null;
+        }
+
+        function togglePriorityMenu(itemId, menu, toggle) {
+            if (!menu || !toggle) {
+                return;
+            }
+            if (openPriorityMenuId === itemId) {
+                closePriorityMenus();
+                return;
+            }
+            closePriorityMenus();
+            openPriorityMenuId = itemId;
+            menu.hidden = false;
+            menu.dataset.open = 'true';
+            toggle.setAttribute('aria-expanded', 'true');
+        }
+
+        function setItemPriority(id, priority) {
+            if (!PRIORITY_ORDER.includes(priority)) {
+                return;
+            }
+            const item = actionItems.find(entry => entry.id === id);
+            if (!item || item.priority === priority) {
+                return;
+            }
+            item.priority = priority;
+            saveActionItems();
+            renderActionItems();
+        }
+
+        function handlePriorityOptionClick(event, id, value) {
+            event.stopPropagation();
+            setItemPriority(id, value);
+            closePriorityMenus();
+        }
+
+        function handleDragStart(event) {
+            event.stopPropagation();
+            const itemElement = event.currentTarget;
+            draggedItemId = Number(itemElement.dataset.id);
+            itemElement.classList.add('dragging');
+            clearDragHighlights();
+            closePriorityMenus();
+            if (event.dataTransfer) {
+                event.dataTransfer.effectAllowed = 'move';
+                event.dataTransfer.setData('text/plain', String(draggedItemId));
+            }
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const target = event.currentTarget;
+            if (Number(target.dataset.id) === draggedItemId) {
+                return;
+            }
+            target.classList.add('drag-over');
+        }
+
+        function handleDragLeave(event) {
+            event.stopPropagation();
+            event.currentTarget.classList.remove('drag-over');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const target = event.currentTarget;
+            target.classList.remove('drag-over');
+            if (actionItemsContainer) {
+                actionItemsContainer.classList.remove('drag-target');
+            }
+            const targetId = Number(target.dataset.id);
+            if (!draggedItemId || targetId === draggedItemId) {
+                return;
+            }
+            const rect = target.getBoundingClientRect();
+            const shouldPlaceAfter = event.clientY > rect.top + rect.height / 2;
+            reorderActionItems(draggedItemId, targetId, shouldPlaceAfter);
+        }
+
+        function handleDragEnd(event) {
+            event.stopPropagation();
+            event.currentTarget.classList.remove('dragging');
+            draggedItemId = null;
+            clearDragHighlights();
+            if (actionItemsContainer) {
+                actionItemsContainer.classList.remove('drag-target');
+            }
+        }
+
+        function handleContainerDragOver(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (actionItemsContainer) {
+                actionItemsContainer.classList.add('drag-target');
+            }
+        }
+
+        function handleContainerDrop(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (!draggedItemId) {
+                return;
+            }
+            if (actionItemsContainer) {
+                actionItemsContainer.classList.remove('drag-target');
+            }
+            reorderActionItems(draggedItemId, null, true);
+        }
+
+        function clearDragHighlights() {
+            document.querySelectorAll('.action-item.drag-over').forEach(item => {
+                item.classList.remove('drag-over');
+            });
+        }
+
+        function reorderActionItems(sourceId, targetId, placeAfter = false) {
+            const fromIndex = actionItems.findIndex(entry => entry.id === sourceId);
+            if (fromIndex === -1) {
+                return;
+            }
+            const [moved] = actionItems.splice(fromIndex, 1);
+            if (targetId === null || targetId === undefined) {
+                actionItems.push(moved);
+            } else {
+                let toIndex = actionItems.findIndex(entry => entry.id === targetId);
+                if (toIndex === -1) {
+                    actionItems.splice(fromIndex, 0, moved);
+                    return;
+                }
+                if (placeAfter) {
+                    toIndex += 1;
+                }
+                actionItems.splice(toIndex, 0, moved);
+            }
+            clearDragHighlights();
+            draggedItemId = null;
+            saveActionItems();
+            renderActionItems();
+        }
+
         // Render action items
         function renderActionItems() {
-            const container = document.getElementById('actionItemsList');
-            container.innerHTML = '';
+            if (!actionItemsContainer) {
+                return;
+            }
+
+            closePriorityMenus();
+            actionItemsContainer.innerHTML = '';
+
+            if (!containerDragHandlersBound) {
+                actionItemsContainer.addEventListener('dragover', handleContainerDragOver);
+                actionItemsContainer.addEventListener('drop', handleContainerDrop);
+                containerDragHandlersBound = true;
+            }
 
             actionItems.forEach(item => {
                 const itemElement = document.createElement('div');
                 itemElement.className = `action-item ${item.completed ? 'completed' : ''}`;
                 itemElement.setAttribute('data-priority', item.priority);
+                itemElement.setAttribute('data-id', item.id);
+                itemElement.setAttribute('role', 'listitem');
+                itemElement.draggable = true;
+
+                const priorityConfig = PRIORITY_SETTINGS[item.priority] || PRIORITY_SETTINGS.medium;
+                const priorityOptionsMarkup = PRIORITY_ORDER.map(priorityValue => {
+                    const config = PRIORITY_SETTINGS[priorityValue];
+                    const isActive = priorityValue === item.priority;
+                    return `<button type="button" class="priority-option ${priorityValue} ${isActive ? 'active' : ''}" data-value="${priorityValue}" role="menuitemradio" aria-checked="${isActive}"><span class="priority-icon">${config.icon}</span><span>${config.label}</span></button>`;
+                }).join('');
 
                 itemElement.innerHTML = `
                     <div class="action-checkbox ${item.completed ? 'checked' : ''}" 
                          onclick="toggleComplete(${item.id})"></div>
+                    <div class="action-drag-handle" aria-hidden="true">
+                        <svg viewBox="0 0 12 12">
+                            <path d="M4 2h4M4 6h4M4 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                        </svg>
+                    </div>
                     <div class="action-content">
                         <div class="action-title">${item.title}</div>
                         <div class="action-description">${item.description}</div>
                         <div class="action-meta">
-                            <span class="action-priority ${item.priority}">
-                                ${item.priority === 'urgent' ? '🔴' : item.priority === 'high' ? '🟠' : '🟡'} 
-                                ${item.priority.toUpperCase()}
-                            </span>
+                            <div class="action-priority-control">
+                                <button type="button" class="action-priority ${item.priority}" data-item-id="${item.id}" aria-haspopup="menu" aria-expanded="false" aria-label="Change priority for ${item.title}">
+                                    <span class="priority-icon">${priorityConfig.icon}</span>
+                                    <span>${priorityConfig.label.toUpperCase()}</span>
+                                    <svg class="priority-caret" viewBox="0 0 12 12" aria-hidden="true">
+                                        <path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    </svg>
+                                </button>
+                                <div class="priority-menu" role="menu" data-open="false" hidden>
+                                    ${priorityOptionsMarkup}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <button class="delete-btn" onclick="deleteAction(${item.id})">
@@ -975,8 +1431,44 @@
                     </button>
                 `;
                 
-                container.appendChild(itemElement);
+                actionItemsContainer.appendChild(itemElement);
+
+                const priorityToggle = itemElement.querySelector('.action-priority');
+                const priorityMenu = itemElement.querySelector('.priority-menu');
+                if (priorityToggle && priorityMenu) {
+                    priorityToggle.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        togglePriorityMenu(item.id, priorityMenu, priorityToggle);
+                    });
+                    priorityToggle.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape') {
+                            closePriorityMenus();
+                            priorityToggle.blur();
+                        }
+                    });
+                    priorityMenu.querySelectorAll('.priority-option').forEach(option => {
+                        option.addEventListener('click', (event) => {
+                            handlePriorityOptionClick(event, item.id, option.dataset.value);
+                        });
+                    });
+                    priorityMenu.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape') {
+                            event.stopPropagation();
+                            event.preventDefault();
+                            closePriorityMenus();
+                            priorityToggle.focus();
+                        }
+                    });
+                }
+
+                itemElement.addEventListener('dragstart', handleDragStart);
+                itemElement.addEventListener('dragover', handleDragOver);
+                itemElement.addEventListener('dragleave', handleDragLeave);
+                itemElement.addEventListener('drop', handleDrop);
+                itemElement.addEventListener('dragend', handleDragEnd);
             });
+
+            ensurePriorityMenuListener();
         }
 
         // Toggle complete status

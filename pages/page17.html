@@ -208,6 +208,29 @@
             margin: 0;
         }
 
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(4, 69, 172, 0), rgba(4, 69, 172, 0.2), rgba(4, 69, 172, 0));
+            border-radius: 999px;
+            margin: 40px 0;
+            box-shadow: 0 12px 24px rgba(4, 69, 172, 0.08);
+        }
+
+        .notes-section {
+            margin-top: clamp(56px, 7vw, 80px);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(32px, 5vw, 40px);
+        }
+
+        .notes-section .section-divider {
+            margin: 0;
+        }
+
+        .notes-section .section-header {
+            margin-top: 0;
+        }
+
 .main-content {
             margin-left: var(--sidebar-width);
             padding: 0;
@@ -949,8 +972,68 @@
                 Save Feedback
             </button>
         </div>
+
+        <section class="notes-section" aria-label="Issues and action items">
+            <div class="section-divider" aria-hidden="true"></div>
+
+            <div>
+                <h2 class="section-header">Issues/Concerns</h2>
+                <textarea
+                    id="issues-concerns-page17"
+                    class="text-area"
+                    placeholder="Enter any issues or concerns here..."
+                    onblur="autoSavePage17Notes()"
+                ></textarea>
+            </div>
+
+            <div>
+                <h2 class="section-header">Action Items</h2>
+                <textarea
+                    id="action-items-page17"
+                    class="text-area"
+                    placeholder="Enter action items here..."
+                    onblur="autoSavePage17Notes()"
+                ></textarea>
+            </div>
+        </section>
         </div>
     </div>
+
+    <script>
+        function autoSavePage17Notes() {
+            const issuesField = document.getElementById('issues-concerns-page17');
+            const actionsField = document.getElementById('action-items-page17');
+            const notes = {
+                issues: issuesField ? issuesField.value : '',
+                actions: actionsField ? actionsField.value : ''
+            };
+
+            try {
+                localStorage.setItem('page17Notes', JSON.stringify(notes));
+            } catch (error) {
+                console.warn('Unable to save notes for page17', error);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const savedNotes = localStorage.getItem('page17Notes');
+                if (savedNotes) {
+                    const notes = JSON.parse(savedNotes);
+                    const issuesField = document.getElementById('issues-concerns-page17');
+                    const actionsField = document.getElementById('action-items-page17');
+                    if (issuesField && typeof notes?.issues === 'string') {
+                        issuesField.value = notes.issues;
+                    }
+                    if (actionsField && typeof notes?.actions === 'string') {
+                        actionsField.value = notes.actions;
+                    }
+                }
+            } catch (error) {
+                console.warn('Unable to load saved notes for page17', error);
+            }
+        });
+    </script>
 
     <script>
         let currentDate = new Date();
